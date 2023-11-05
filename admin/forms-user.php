@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +40,7 @@
   ======================================================== -->
 </head>
 <body>
+
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -125,12 +128,11 @@
           <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-        <li>
-    <a href="forms-user.php">
-        <i class="bi bi-circle" id="user"></i><span>Add User</span>
-    </a>
-</li>
-
+          <li>
+            <a href="forms-user.php" class="active">
+              <i class="bi bi-circle" id="brand"></i><span>Add User</span>
+            </a>
+          </li>
           <li>
             <a href="forms-progress.php" >
               <i class="bi bi-circle" id="category"></i><span>Add Data Progress Bimbingan</span>
@@ -170,15 +172,61 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-    <h1>Dashboard</h1>
-      <h3>Selamat Datang admin</h3>
-      <p>Anda Login Sebagai admin</p>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
+    <h1>Tambah Pengguna</h1>
+
+<form method="post" action="proses_tambah_pengguna.php">
+    <label for="userType">Tipe Pengguna:</label>
+    <select name="userType" id="userType">
+        <option value="admin">Admin</option>
+        <option value="dosen">Dosen</option>
+        <option value="mahasiswa">Mahasiswa</option>
+    </select>
+    <br>
+
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username" required>
+    <br>
+
+    <label for="nama">Nama:</label>
+    <input type="text" name="nama" id="nama" required>
+    <br>
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" required>
+    <br>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
+    <br>
+
+    <label for="no_telp">Nomor Telepon:</label>
+    <input type="text" name="no_telp" id="no_telp" required>
+    <br>
+
+    <!-- Jika tipe pengguna adalah dosen atau mahasiswa, tampilkan kolom NIP atau NIM -->
+    <div id="nipNimContainer" style="display: none;">
+        <label for="nipNim">NIP/NIM:</label>
+        <input type="text" name="nipNim" id="nipNim" required>
+        <br>
+    </div>
+
+    <input type="submit" value="Tambah Pengguna">
+</form>
+
+<script>
+    // Tampilkan atau sembunyikan kolom NIP atau NIM berdasarkan tipe pengguna yang dipilih
+    const userTypeSelect = document.getElementById("userType");
+    const nipNimContainer = document.getElementById("nipNimContainer");
+
+    userTypeSelect.addEventListener("change", function() {
+        const selectedUserType = userTypeSelect.value;
+        if (selectedUserType === "dosen" || selectedUserType === "mahasiswa") {
+            nipNimContainer.style.display = "block";
+        } else {
+            nipNimContainer.style.display = "none";
+        }
+    });
+</script>
     </div><!-- End Page Title -->
 
     <section class="section dashboard">

@@ -39,6 +39,7 @@
 </head>
 <body>
 
+
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -125,14 +126,13 @@
           <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-        <li>
-    <a href="forms-user.php">
-        <i class="bi bi-circle" id="user"></i><span>Add User</span>
-    </a>
-</li>
-
           <li>
-            <a href="forms-progress.php" >
+            <a href="forms-user.php" >
+              <i class="bi bi-circle" id="brand"></i><span>Add User</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-progress.php" class="active">
               <i class="bi bi-circle" id="category"></i><span>Add Data Progress Bimbingan</span>
             </a>
           </li>
@@ -170,15 +170,46 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-    <h1>Dashboard</h1>
-      <h3>Selamat Datang admin</h3>
-      <p>Anda Login Sebagai admin</p>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
+    <h1>Form Add Progress Bimbingan</h1>
+    <form method="post" action="process_add_progress.php">
+        <label for="mahasiswa_id">Cari Mahasiswa:</label>
+        <input type="text" id="searchMahasiswa" onkeyup="searchMahasiswa()" placeholder="Cari Mahasiswa...">
+        <div id="mahasiswaList"></div>
+        <input type="hidden" name="mahasiswa_id" id="selectedMahasiswa">
+        <br>
+
+        <label for="dosen_id">Dosen Pembimbing:</label>
+        <select name="dosen_id" id="dosen_id">
+            <option value="1">Dosen 1</option>
+            <option value="2">Dosen 2</option>
+            <option value="3">Dosen 3</option>
+            <!-- Tambahkan pilihan dosen sesuai dengan kebutuhan -->
+        </select>
+        <br>
+
+        <input type="submit" value="Simpan">
+    </form>
+
+    <script>
+        function searchMahasiswa() {
+            var input = document.getElementById("searchMahasiswa").value.toLowerCase();
+            var mahasiswaList = document.getElementById("mahasiswaList");
+            mahasiswaList.innerHTML = "";
+
+            var options = document.querySelectorAll("#mahasiswa_id option");
+            options.forEach(function(option) {
+                if (option.text.toLowerCase().indexOf(input) > -1) {
+                    var item = document.createElement("div");
+                    item.textContent = option.text;
+                    item.addEventListener("click", function() {
+                        document.getElementById("selectedMahasiswa").value = option.value;
+                        mahasiswaList.innerHTML = "";
+                    });
+                    mahasiswaList.appendChild(item);
+                }
+            });
+        }
+    </script>
     </div><!-- End Page Title -->
 
     <section class="section dashboard">

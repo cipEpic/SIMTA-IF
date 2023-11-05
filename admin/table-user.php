@@ -39,6 +39,7 @@
 </head>
 <body>
 
+
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -125,14 +126,13 @@
           <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-        <li>
-    <a href="forms-user.php">
-        <i class="bi bi-circle" id="user"></i><span>Add User</span>
-    </a>
-</li>
-
           <li>
-            <a href="forms-progress.php" >
+            <a href="forms-user.php" >
+              <i class="bi bi-circle" id="brand"></i><span>Add User</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-progress.php" class="active">
               <i class="bi bi-circle" id="category"></i><span>Add Data Progress Bimbingan</span>
             </a>
           </li>
@@ -170,15 +170,52 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-    <h1>Dashboard</h1>
-      <h3>Selamat Datang admin</h3>
-      <p>Anda Login Sebagai admin</p>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
+    <!DOCTYPE html>
+<html>
+<head>
+    <title>Daftar Pengguna</title>
+</head>
+<body>
+    <h1>Daftar Pengguna</h1>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>No. Telepon</th>
+            <th>Aksi</th>
+        </tr>
+
+        <tr>
+            <td>1</td>
+            <td>admin1</td>
+            <td>Admin Satu</td>
+            <td>admin1@example.com</td>
+            <td>123456789</td>
+            <td><a href="#">Hapus</a></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>dosen1</td>
+            <td>Dosen Satu</td>
+            <td>dosen1@example.com</td>
+            <td>987654321</td>
+            <td><a href="#">Hapus</a></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>mahasiswa1</td>
+            <td>Mahasiswa Satu</td>
+            <td>mahasiswa1@example.com</td>
+            <td>555555555</td>
+            <td><a href="#">Hapus</a></td>
+        </tr>
+    </table>
+</body>
+</html>
+
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
