@@ -29,7 +29,7 @@
       <img src="..\public\assets\img\fav.ico" width="100" height="auto" alt="Logo">
     </a>
     <a href="#" class="w3-bar-item w3-button w3-padding-large">PROGRESS TA</a>
-    <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline"><i class="fa fa-user"></i> LOGIN </a>
+    <a href="..\admin\login.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline"><i class="fa fa-user"></i> LOGIN </a>
   </div>
 </div>
 
