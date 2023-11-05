@@ -1,0 +1,8 @@
+nanti ada 1 form
+
+untuk add user
+untuk admin menentukan dosen melakukan bimbingan ke mahasiswa mana saja (progress_bimbingan)
+
+ada 2 tabel data
+tabel user
+tabel progress semua mahasiswa

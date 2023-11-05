@@ -1,0 +1,21 @@
+jadi ada login dosen dan mahasiswa (tapi ga ada register karena diisi admin katanya)
+
+
+kurang lebih ada homepage buat loginnya
+
+di menu dosen
+
+nanti ada seperti tabel yang di centang?
+2 kolom lah 7 baris utama
+
+di menu mahasiswa
+cuma bisa lihat progress (udah kecentang blum)
+
+di menu admin
+ada dashboard yang menunjukkan jumlah mahasiswa, dosen, admin
+ada form mahasiswa, bisa menambah, mengedit, menghapus user mahasiswa.
+ada form dosen, bisa menambah, mengedit, menghapus user dosen.
+ada admin, bisa menambah, mengedit, menghapus user admin.
+
+
+database
