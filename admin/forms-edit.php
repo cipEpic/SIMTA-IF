@@ -2,7 +2,7 @@
 <html>
 
 <head>
-        <title>SIMTA UNUD</title>
+        <title>toko baju eduwork</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
         <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
@@ -247,7 +247,9 @@
     <section class="d-flex justify-content-between p-4" style="background-color: #6351ce">
       <!-- Left -->
       <div class="me-5">
-        <span>Check your Progress of Tugas Akhir Information</span>
+        <span>Start shopping with us today and experience the joy of finding the perfect fashion pieces that reflect
+          your
+          personality and individuality.</span>
       </div>
 
     </section>
@@ -260,10 +262,47 @@
           <!-- Grid column -->
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
             <!-- Content -->
-            <h6 class="text-uppercase fw-bold">SIMTA UDAYANA</h6>
+            <h6 class="text-uppercase fw-bold">Eduwork Shop's</h6>
             <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
             <p>
-            This Project is about Sistem Monitoring Tugas Akhir.
+              This Project is about Sistem Monitoring Tugas Akhir.
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold">Products</h6>
+            <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
+            <p>
+              <a href="index.php#" class="text-white">Shirt</a>
+            </p>
+            <p>
+              <a href="index.php#" class="text-white">Jacket</a>
+            </p>
+            <p>
+              <a href="index.php#" class="text-white">Shoe's</a>
+            </p>
+            <p>
+              <a href="index.php#" class="text-white">Any Other's clothes </a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold">Pages</h6>
+            <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
+            <p>
+              <a href="index.php#" class="text-white">Home</a>
+            </p>
+            <p>
+              <a href="manajemen.php" class="text-white">Manajemen</a>
+            </p>
+            <p>
+              <a href="about.php" class="text-white">About</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -273,8 +312,9 @@
             <!-- Links -->
             <h6 class="text-uppercase fw-bold">Contact</h6>
             <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
-            <p><i class="fa fa-home mr-3"></i> Denpasar, Bali, Indonesia</p>
-            <p><i class="fa fa-envelope mr-3"></i> evidnsr@gmail.com</p>
+            <p><i class="fas fa-home mr-3"></i> Denpasar, Bali, Indonesia</p>
+            <p><i class="fas fa-envelope mr-3"></i> evidnsr@gmail.com</p>
+            <p><i class="fas fa-phone mr-3"></i> + 62 85536553592</p>
           </div>
           <!-- Grid column -->
         </div>

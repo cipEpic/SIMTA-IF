@@ -1,4 +1,23 @@
 <!DOCTYPE html>
+<html>
+
+<head>
+        <title>SIMTA UNUD</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
+        <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script> -->
+        <link rel="stylesheet" href="styles\global.css">
+        <link rel="icon" type="image/x-icon" href="public\favicon.ico">
+</head>
+
+<!-- connect ke database -->
+<body class="hold-transition sidebar-mini">
+
 <html lang="en">
 <head>
   <title>W3.CSS Template</title>
@@ -33,161 +52,168 @@
 <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
 </div>
 
-<!-- Page content -->
-<div class="w3-content" style="max-width:2000px;margin-top:46px">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <!-- <h1>DataTables</h1> -->
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">DataMahasiswa</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+    
 
-  <h2>Pilih Mahasiswa dan Lihat Progres Bimbingan</h2>
 
-  <form action="" method="post">
-    <label for="mahasiswaInput">Cari Mahasiswa:</label>
-    <input type="text" id="mahasiswaInput" oninput="filterMahasiswa()">
-    <input type="submit" name="submit" value="Lihat Progres">
-  </form>
 
-  <p id="progresTitle">Progress bimbingan meliputi:</p>
-  <form action="simpan_progress.php" method="post" enctype="multipart/form-data">
-    <table border="1">
-      <tr>
-        <th>No.</th>
-        <th>Progres</th>
-        <th>Status Persetujuan</th>
-        <th>Unggah Revisi</th>
-      </tr>
-      <tr>
-        <td>1.</td>
-        <td>Pendahuluan</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" name="progress[]" value="Sampul depan"> Sampul depan
-            <br>
-            <input type="checkbox" name="progress[]" value="Lembar judul"> Lembar judul
-            <br>
-            <input type="checkbox" name="progress[]" value="Lembar pengesahan"> Lembar pengesahan
-            <br>
-            <input type="checkbox" name="progress[]" value="Abstrak"> Abstrak
-            <br>
-            <input type="checkbox" name="progress[]" value="Kata pengantar"> Kata pengantar
-            <br>
-            <input type="checkbox" name="progress[]" value="Daftar isi"> Daftar isi
-            <br>
-            <input type="checkbox" name="progress[]" value="Daftar table"> Daftar table
-            <br>
-            <input type="checkbox" name="progress[]" value="Daftar gambar"> Daftar gambar
-          </fieldset>
-        </td>
-        <td><input type="file" name="file_pendahuluan"></td>
-      </tr>
-      <tr>
-        <td>2.</td>
-        <td>BAB I</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Latar belakang
-            <br>
-            <input type="checkbox" name "progress[]" value="Rumusan masalah"> b. Rumusan masalah
-            <br>
-            <input type="checkbox" name="progress[]" value="Batasan masalah"> c. Batasan masalah
-            <br>
-            <input type="checkbox" name="progress[]" value="Tujuan"> d. Tujuan
-            <br>
-            <input type="checkbox" name="progress[]" value="Manfaat"> e. Manfaat
-            <br>
-            <input type="checkbox" name="progress[]" value="Sistematika Penulisan"> f. Sistematika Penulisan
-          </fieldset>
-        </td>
-        <td><input type="file" name="file_Bab1"></td>
-      </tr>
-      <tr>
-        <td>3.</td>
-        <td>BAB II</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" name="progress[]" value="Tinjauan teori"> a. Tinjauan teori
-            <br>
-            <input type="checkbox" name="progress[]" value="Tinjauan Empiris"> b. Tinjauan Empiris
-          </fieldset>
-        </td>
-        <td><input type="file" name="file_Bab2"></td>
-      </tr>
-      <tr>
-        <td>4.</td>
-        <td>BAB III</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Data dan Metode Pengumpulan Data
-            <br>
-            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Desain sistem/Metode
-            <br>
-            <input type="checkbox" name="progress[]" value="Batasan masalah"> c. Desain Evaluasi Sistem/Metode
-          </fieldset>
-        </td>
-        <td><input type="file" name="file_Bab3"></td>
-      </tr>
-      <tr>
-        <td>5.</td>
-        <td>BAB IV</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Proses Pengumpulan Data
-            <br>
-            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Implementasi Sistem/Metode
-            <br>
-            <input type="checkbox" name="progress[]" value="Batasan masalah"> c. Implementasi Evaluasi Sistem/Metode
-          </fieldset>
-        </td>
-        <td><input type="file" name="file_bab4"></td>
-      </tr>
-      <tr>
-        <td>6.</td>
-        <td>BAB V</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Kesimpulan
-            <br>
-            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Saran
-          </fieldset>
-        </td>
-        <td><input type="file" name="file_bab5"></td>
-      </tr>
-      <tr>
-        <td>7.</td>
-        <td>Akhir</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Daftar Pustaka
-            <br>
-            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Lampiran
-          </fieldset>
-        </td>
-        <td><input type="file" name="file_akhir"></td>
-      </tr>
-      <!-- Tambahkan progres-progres lainnya sesuai kebutuhan -->
-    </table>
-    <input type="submit" name="simpanProgress" value="Simpan Progress">
-  </form>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Data Mahasiswa</h3>
+                                </div>
 
-  <script>
-    function filterMahasiswa() {
-      var input, filter, select, option, i, txtValue;
-      input = document.getElementById("mahasiswaInput");
-      filter = input.value.toUpperCase();
-      select = document.getElementById("mahasiswa");
-      option = select.getElementsByTagName("option");
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>NIM</th>
+                                                <th>Nama Mahasiswa</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+        <!-- Example data -->
+        <tr>
+            <td>1</td>
+            <td>123456</td>
+            <td>John Doe</td>
+            <td>
+                <!-- Add any action buttons or links here -->
+                <a class="btn btn-primary" href="editdosen.php">Edit</a>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>789012</td>
+            <td>Jane Doe</td>
+            <td>
+                <!-- Add any action buttons or links here -->
+                <a class="btn btn-primary" href="editdosen.php">Edit</a>
+            </td>
+        </tr>
+        <!-- Add more rows as needed -->
 
-      for (i = 0; i < option.length; i++) {
-        txtValue = option[i].text;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          option[i].style.display = "";
-        } else {
-          option[i].style.display = "none";
-        }
-      }
-    }
-  </script>
-</div>
+    </tbody>
+                                        <tfoot>
+                                            <tr>
+                                            <th>No</th>
+                                            <th>NIM</th>
+                                                <th>Nama Mahasiswa</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
 
-<!-- Footer -->
-<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
-  <i class="fa fa-facebook-official w3-hover-opacity"></i>
-  <i class="fa fa-instagram w3-hover-opacity"></i>
-  <i class="fa fa-snapchat
+
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <script>
+    $(function () {
+        $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+    </script>
+
+
+  <!-- Footer -->
+  <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-between p-4" style="background-color: #6351ce">
+      <!-- Left -->
+      <div class="me-5">
+        <span>Check your Progress of Tugas Akhir Information</span>
+      </div>
+
+    </section>
+
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold">SIMTA UDAYANA</h6>
+            <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
+            <p>
+            This Project is about Sistem Monitoring Tugas Akhir.
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold">Contact</h6>
+            <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
+            <p><i class="fa fa-home mr-3"></i> Denpasar, Bali, Indonesia</p>
+            <p><i class="fa fa-envelope mr-3"></i> evidnsr@gmail.com</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: black">
+      © 2023 Copyright:
+      <a class="text-white" href="https://github.com/cipEpic/Toko-Baju-Eduwork">cipEpic.om</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</body>
+</html>

@@ -78,8 +78,7 @@
         <div class="col-12">
 			<div class="card p-lg-5">
                 <div class="card-header">
-                    <h2>Selamat datang, Nama Mahasiswa</h2>
-                    <h3>Progress Bimbingan Anda</h3>
+                <h3 class="card-title">Progress Bimbingan nama mahasiswa</h3>
                 </div>
                                 
             <form id="customerForm" action="prosesedit-jquery.php?id_product=<?php echo $id_product; ?>" method="post">
@@ -88,120 +87,123 @@
         <th>No.</th>
         <th>Progres</th>
         <th>Status Persetujuan</th>
-        <th>Unduh Revisi</th>
+        <th>Unggah Revisi</th>
       </tr>
       <tr>
         <td>1.</td>
         <td>Pendahuluan</td>
         <td>
           <fieldset>
-            <input type="checkbox" disabled checked> Sampul depan
+            <input type="checkbox" name="progress[]" value="Sampul depan"> Sampul depan
             <br>
-            <input type="checkbox" disabled checked> Lembar judul
+            <input type="checkbox" name="progress[]" value="Lembar judul"> Lembar judul
             <br>
-            <input type="checkbox" disabled checked> Lembar pengesahan
+            <input type="checkbox" name="progress[]" value="Lembar pengesahan"> Lembar pengesahan
             <br>
-            <input type="checkbox" disabled checked> Abstrak
+            <input type="checkbox" name="progress[]" value="Abstrak"> Abstrak
             <br>
-            <input type="checkbox" disabled checked> Kata pengantar
+            <input type="checkbox" name="progress[]" value="Kata pengantar"> Kata pengantar
             <br>
-            <input type="checkbox" disabled checked> Daftar isi
+            <input type="checkbox" name="progress[]" value="Daftar isi"> Daftar isi
             <br>
-            <input type="checkbox" disabled checked> Daftar table
+            <input type="checkbox" name="progress[]" value="Daftar table"> Daftar table
             <br>
-            <input type="checkbox" disabled checked> Daftar gambar
+            <input type="checkbox" name="progress[]" value="Daftar gambar"> Daftar gambar
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=file_pendahuluan.pdf">Unduh Revisi</a></td>
+        <td><input type="file" name="file_pendahuluan"></td>
       </tr>
       <tr>
         <td>2.</td>
         <td>BAB I</td>
         <td>
           <fieldset>
-            <input type="checkbox" disabled checked> a. Latar belakang
+            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Latar belakang
             <br>
-            <input type="checkbox" disabled checked> b. Rumusan masalah
+            <input type="checkbox" name "progress[]" value="Rumusan masalah"> b. Rumusan masalah
             <br>
-            <input type="checkbox" disabled checked> c. Batasan masalah
+            <input type="checkbox" name="progress[]" value="Batasan masalah"> c. Batasan masalah
             <br>
-            <input type="checkbox" disabled checked> d. Tujuan
+            <input type="checkbox" name="progress[]" value="Tujuan"> d. Tujuan
             <br>
-            <input type="checkbox" disabled checked> e. Manfaat
+            <input type="checkbox" name="progress[]" value="Manfaat"> e. Manfaat
             <br>
-            <input type="checkbox" disabled checked> f. Sistematika Penulisan
+            <input type="checkbox" name="progress[]" value="Sistematika Penulisan"> f. Sistematika Penulisan
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+        <td><input type="file" name="file_Bab1"></td>
       </tr>
       <tr>
         <td>3.</td>
         <td>BAB II</td>
         <td>
           <fieldset>
-            <input type="checkbox" disabled checked> a.	Tinjauan teori
+            <input type="checkbox" name="progress[]" value="Tinjauan teori"> a. Tinjauan teori
             <br>
-            <input type="checkbox" disabled checked> b.	Tinjauan Empiris
+            <input type="checkbox" name="progress[]" value="Tinjauan Empiris"> b. Tinjauan Empiris
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+        <td><input type="file" name="file_Bab2"></td>
       </tr>
       <tr>
         <td>4.</td>
         <td>BAB III</td>
         <td>
           <fieldset>
-            <input type="checkbox" disabled checked> a.	Data dan Metode Pengumpulan Data
+            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Data dan Metode Pengumpulan Data
             <br>
-            <input type="checkbox" disabled checked> b.	Desain sistem/Metode
+            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Desain sistem/Metode
             <br>
-            <input type="checkbox" disabled checked> c.	Desain Evaluasi Sistem/Metode
+            <input type="checkbox" name="progress[]" value="Batasan masalah"> c. Desain Evaluasi Sistem/Metode
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+        <td><input type="file" name="file_Bab3"></td>
       </tr>
       <tr>
         <td>5.</td>
         <td>BAB IV</td>
         <td>
           <fieldset>
-            <input type="checkbox" disabled checked> a.	Proses Pengumpulan Data
+            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Proses Pengumpulan Data
             <br>
-            <input type="checkbox" disabled checked> b.	Implementasi Sistem/Metode
+            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Implementasi Sistem/Metode
             <br>
-            <input type="checkbox" disabled checked> c.	Implementasi Evaluasi Sistem/Metode
+            <input type="checkbox" name="progress[]" value="Batasan masalah"> c. Implementasi Evaluasi Sistem/Metode
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+        <td><input type="file" name="file_bab4"></td>
       </tr>
       <tr>
         <td>6.</td>
         <td>BAB V</td>
         <td>
           <fieldset>
-            <input type="checkbox" disabled checked> a.	Kesimpulan
+            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Kesimpulan
             <br>
-            <input type="checkbox" disabled checked> b.	Saran
+            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Saran
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+        <td><input type="file" name="file_bab5"></td>
       </tr>
       <tr>
         <td>7.</td>
         <td>Akhir</td>
         <td>
           <fieldset>
-            <input type="checkbox" disabled checked> a. Daftar Pustaka
+            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Daftar Pustaka
             <br>
-            <input type="checkbox" disabled checked> b. Tampilan
+            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Lampiran
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+        <td><input type="file" name="file_akhir"></td>
       </tr>
                         
                     </tbody>
                 </table>
-                
+                <tr>
+                            <td></td>
+                            <td><input type="submit" name="Submit" value="edit" class="btn btn-danger"></td>
+                        </tr>
             </form>
             </div>
         </div>
@@ -241,8 +243,8 @@
         });
     </script>
 
-  <!-- Footer -->
-  <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">
+   <!-- Footer -->
+   <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">
     <!-- Section: Social media -->
     <section class="d-flex justify-content-between p-4" style="background-color: #6351ce">
       <!-- Left -->
