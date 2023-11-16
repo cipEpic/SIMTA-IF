@@ -200,25 +200,25 @@ require_once "../config/config.php";
               
               <div class="row position-relative mb-3">
                 <div class="input-group has-validation">
-                  <span class="input-group-text" id="nameftw">Dosen Name &emsp;</span>
-                  <input type="text" class="form-control" name="nameftw" id="nameftw" aria-describedby="nameftw" required>
+                  <span class="input-group-text" id="NIP">Dosen NIP &emsp;</span>
+                  <input type="text" class="form-control" name="NIP" id="NIP" aria-describedby="NIP" required>
                   <div class="valid-tooltip">
                     Looks good!
                   </div>
                   <div class="invalid-tooltip">
-                    Please choose a unique and valid Name.
+                    Please choose a unique and valid NIP.
                   </div>
                 </div>
               </div>
               <div class="row position-relative mb-3">
                 <div class="input-group has-validation">
-                  <span class="input-group-text" id="nameftw">Mahasiswa Name &emsp;</span>
-                  <input type="text" class="form-control" name="nameftw" id="nameftw" aria-describedby="nameftw" required>
+                  <span class="input-group-text" id="NIM">Mahasiswa NIM &emsp;</span>
+                  <input type="text" class="form-control" name="NIM" id="NIM" aria-describedby="NIM" required>
                   <div class="valid-tooltip">
                     Looks good!
                   </div>
                   <div class="invalid-tooltip">
-                    Please choose a unique and valid Name.
+                    Please choose a unique and valid NIM.
                   </div>
                 </div>
               </div>

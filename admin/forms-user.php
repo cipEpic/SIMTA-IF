@@ -190,8 +190,8 @@ require_once "../config/config.php";
               <div class="row position-relative mb-3">
                 <!-- <label for="validationTooltipUsername" class="form-label">Username</label> -->
                 <div class="input-group has-validation">
-                  <span class="input-group-text" id="id_tempat_wisata">Id &emsp;&emsp;&emsp;</span>
-                  <input type="number" class="form-control" name="id_tempat_wisata" id="id_tempat_wisata" aria-describedby="id_tempat_wisata" disabled>
+                  <span class="input-group-text" id="id_user">Id &emsp;&emsp;&emsp;</span>
+                  <input type="number" class="form-control" name="id_user" id="id_user" aria-describedby="id_user" disabled>
                   <div class="invalid-tooltip">
                     Please choose a unique and valid Id.
                   </div>
@@ -210,14 +210,14 @@ require_once "../config/config.php";
                       Looks good!
                     </div>
                     <div class="invalid-feedback">
-                      Please select a valid id category.
+                      Please select a valid user type category.
                     </div>
                   </div>
                 </div>
               <div class="row position-relative mb-3">
                 <div class="input-group has-validation">
-                  <span class="input-group-text" id="nameftw">Name &emsp;</span>
-                  <input type="text" class="form-control" name="nameftw" id="nameftw" aria-describedby="nameftw" required>
+                  <span class="input-group-text" id="name">Name &emsp;</span>
+                  <input type="text" class="form-control" name="name" id="name" aria-describedby="name" required>
                   <div class="valid-tooltip">
                     Looks good!
                   </div>
@@ -228,81 +228,56 @@ require_once "../config/config.php";
               </div>
               <div class="row position-relative mb-3">
                 <div class="input-group has-validation">
-                  <span class="input-group-text" id="nameftw">Password &emsp;</span>
-                  <input class="form-control" type="password" name="password" id="password" aria-describedby="nameftw" required>
+                  <span class="input-group-text" id="password">Password &emsp;</span>
+                  <input class="form-control" type="password" name="password" id="password" aria-describedby="password" required>
                   <div class="valid-tooltip">
                     Looks good!
                   </div>
                   <div class="invalid-tooltip">
-                    Please choose a unique and valid Name.
+                    Please choose a unique and valid Password.
                   </div>
                 </div>
               </div>
               <div class="row position-relative mb-3">
                 <div class="input-group has-validation">
-                  <span class="input-group-text" id="deskripsi">email &emsp;</span>
+                  <span class="input-group-text" id="email">email &emsp;</span>
                   <input class="form-control" type="email" name="email" id="email" required></input>
                   <div class="valid-tooltip">
                     Looks good!
                   </div>
                   <div class="invalid-tooltip">
-                    Please choose a unique and valid Deskripsi.
+                    Please choose a unique and valid email.
                   </div>
                 </div>
               </div>
               <div class="row position-relative mb-3">
                 <div class="input-group has-validation">
-                  <span class="input-group-text" id="deskripsi">Nomor Telepon &emsp;</span>
+                  <span class="input-group-text" id="no_telp">Nomor Telepon &emsp;</span>
                   <input class="form-control" type="text" name="no_telp" id="no_telp" required></input>
                   <div class="valid-tooltip">
                     Looks good!
                   </div>
                   <div class="invalid-tooltip">
-                    Please choose a unique and valid Deskripsi.
+                    Please choose a unique and valid No Telepon.
                   </div>
                 </div>
               </div>
               <div class="row position-relative mb-3">
                 <!-- <label for="validationTooltipUsername" class="form-label">Username</label> -->
                 <div class="input-group has-validation">
-                  <span class="input-group-text" id="nipNimContainer">NIP/NIM &emsp;&emsp;&emsp;</span>
-                  <input type="text" class="form-control" name="nipNim" id="nipNim" aria-describedby="id_tempat_wisata" >
+                  <span class="input-group-text" id="nipNim">NIP/NIM &emsp;&emsp;&emsp;</span>
+                  <input type="text" class="form-control" name="nipNim" id="nipNim" aria-describedby="nipNim" >
                   <div class="invalid-tooltip">
                     Please choose a unique and valid Id.
                   </div>
                 </div>
-              </div>
-
-              
+              </div>           
               <div class="row mt-4">
                 <button class="btn btn-success" type="submit" name="forms-validationtw"><i class="bi bi-file-earmark-check"></i> Submit Data</button>
               </div>
-            </form><!-- End Custom Styled Validation with Tooltips -->
-            
 
-            <!-- <script>
-              document.addEventListener("DOMContentLoaded", function () {
-                // Function to toggle the disabled attribute of the NIP/NIM input
-                function toggleNipNimInput() {
-                  const userTypeSelect = document.getElementById("Usertype");
-                  const nipNimInput = document.getElementById("id_tempat_wisata");
-
-                  // Check if the selected user type is "dosen" or "mahasiswa"
-                  const isEnabled = userTypeSelect.value === "dosen" || userTypeSelect.value === "mahasiswa";
-
-                  // Enable or disable the NIP/NIM input based on the condition
-                  nipNimInput.disabled = !isEnabled;
-                }
-
-                // Call the function once when the page loads
-                toggleNipNimInput();
-
-                // Add event listener to handle changes in the user type
-                document.getElementById("Usertype").addEventListener("change", toggleNipNimInput);
-              });
-            </script> -->
-
-
+            </form>
+            <!-- End Custom Styled Validation with Tooltips -->
           </div>
         </div>
       </div>

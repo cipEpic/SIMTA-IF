@@ -6,6 +6,39 @@ require_once "../config/config.php";
 
 // start crud proses progress
 {
+    // start proses forms progress
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["forms-validationtw"])) {
+        // Retrieve form data
+        $nip = $_POST["NIP"];
+        $nim = $_POST["NIM"];
+    
+        // Check if the Dosen NIP and Mahasiswa NIM exist in the database
+        $queryDosen = "SELECT id_dosen FROM dosen WHERE NIP = '$nip'";
+        $resultDosen = mysqli_query($host, $queryDosen);
+        $queryMahasiswa = "SELECT id_mahasiswa FROM mahasiswa WHERE NIM = '$nim'";
+        $resultMahasiswa = mysqli_query($host, $queryMahasiswa);
+    
+        if ($resultDosen && $resultMahasiswa) {
+            $rowDosen = mysqli_fetch_assoc($resultDosen);
+            $rowMahasiswa = mysqli_fetch_assoc($resultMahasiswa);
+    
+            // Add progress data to the database
+            $queryAddProgress = "INSERT INTO progress_bimbingan (id_mahasiswa, id_dosen) VALUES ($rowMahasiswa[id_mahasiswa], $rowDosen[id_dosen])";
+            $resultAddProgress = mysqli_query($host, $queryAddProgress);
+    
+            if ($resultAddProgress) {
+                echo "<script>alert('You have successfully add the data progress');</script>";
+                echo "<script type='text/javascript'> document.location ='table-progress.php'; </script>";
+            } else {
+                // Jika Gagal, Lakukan :
+                echo "<script>alert('Something Went Wrong. Please try again');</script>";
+                echo "<script type='text/javascript'> document.location ='table-progress.php'; </script>";
+            }
+    }
+    }
+    //end prosess form progress
+
+
     // start delete progress
     if (isset($_POST['deletep']) && isset($_POST['id_progress'])) {
         $id_progress = $_POST['id_progress'];
@@ -26,12 +59,59 @@ require_once "../config/config.php";
         // Close the statement
         $stmt->close();
     } // end delete progress
+    
 } // end crud proses progress
 
 
 
 //start crud proses user
 {
+
+// start proses forms user
+if (isset($_POST['forms-validationtw'])) {
+    // Get form data
+    $userType = $_POST['userType'];
+    $name = $_POST['name'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $email = $_POST['email'];
+    $no_telp = $_POST['no_telp'];
+    $nipNim = isset($_POST['nipNim']) ? $_POST['nipNim'] : null;
+
+    // Insert data into the appropriate table based on user type
+    switch ($userType) {
+        case 'admin':
+            // Insert data into the admin table
+            $query = "INSERT INTO admin (username, nama, password, email, no_telp) VALUES ('$name', '$name', '$password', '$email', '$no_telp')";
+            break;
+        case 'dosen':
+            // Insert data into the dosen table
+            $query = "INSERT INTO dosen (NIP, username, nama_dosen, password, email, no_telp) VALUES ('$nipNim', '$name', '$name', '$password', '$email', '$no_telp')";
+            break;
+        case 'mahasiswa':
+            // Insert data into the mahasiswa table
+            $query = "INSERT INTO mahasiswa (NIM, username, nama_mahasiswa, password, email, no_telp) VALUES ('$nipNim', '$name', '$name', '$password', '$email', '$no_telp')";
+            break;
+        default:
+            // Handle other user types or show an error
+            die("Invalid user type");
+    }
+
+    // Execute the query
+    $result = mysqli_query($host, $query);
+
+    // Check if the query was successful
+    if ($result) {
+        echo "Data added successfully!";
+        echo "<script>alert('You have successfully inserted the data user');</script>";
+            echo "<script type='text/javascript'> document.location ='table-user.php'; </script>";
+    } else {
+        echo "<script>alert('Something Went Wrong. Please try again');</script>";
+            echo "<script type='text/javascript'> document.location ='forms-user.php'; </script>";
+    }
+
+} // end proses forms user
+
+
 // Delete User
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
@@ -67,8 +147,6 @@ if (isset($_GET["id"])) {
 }
 
 } // end crud proses user
-
-
 
 
 
