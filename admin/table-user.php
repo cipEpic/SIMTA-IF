@@ -1,4 +1,8 @@
 
+<?php
+require_once "../config/config.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -201,7 +205,43 @@
                       </tr>
                     </thead>
                     <tbody>
-                      
+                    <?php
+                    require_once "../config/config.php";
+
+                    $query = "SELECT id_admin AS id, username, nama AS name, email, no_telp FROM admin 
+                              UNION
+                              SELECT id_dosen AS id, username, nama_dosen AS name, email, no_telp FROM dosen 
+                              UNION
+                              SELECT id_mahasiswa AS id, username, nama_mahasiswa AS name, email, no_telp FROM mahasiswa";
+
+                    $data = mysqli_query($host, $query);
+
+                    if ($data) {
+                        if (mysqli_num_rows($data) > 0) {
+                            $no = 1;
+                            while ($d = mysqli_fetch_array($data)) {
+                    ?>
+                                <tr>
+                                    <td><?php echo $no; ?></td>
+                                    <td><?php echo $d["username"]; ?></td>
+                                    <td><?php echo $d["name"]; ?></td>
+                                    <td><?php echo $d["email"]; ?></td>
+                                    <td><?php echo $d["no_telp"]; ?></td>
+                                    <td><a href="proses.php?id=<?php echo $d['id']; ?>" class="btn btn-danger">Delete</a></td>
+                                </tr>
+                    <?php
+                                $no++;
+                            }
+                        } else {
+                            echo "No records found";
+                        }
+                    } else {
+                        echo "Error: " . mysqli_error($host);
+                    }
+
+                    // Don't forget to close the connection
+                    mysqli_close($host);
+                    ?>
                     </tbody>
                   </table>
                   <!-- End Table with stripped rows -->

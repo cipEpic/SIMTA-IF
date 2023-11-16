@@ -1,7 +1,3 @@
-<?php
-  require_once "../config/config.php";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,7 +76,7 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-user.php" >
+            <a href="forms-user.php" class="active">
               <i class="bi bi-circle" id="brand"></i><span>Add User</span>
             </a>
           </li>
@@ -105,7 +101,7 @@
           </a>
         </li>
         <li>
-          <a href="table-progress.php" class="active">
+          <a href="table-progress.php">
             <i class="bi bi-circle"></i><span>Data Tables Progress Bimbingan</span>
           </a>
         </li>
@@ -177,7 +173,7 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
           <li class="breadcrumb-item">Tables Data</li>
-          <li class="breadcrumb-item active">Tables Data  Progress Bimbingan</li>
+          <li class="breadcrumb-item active">Tables Data Tempat Wisata</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -191,71 +187,130 @@
             <div class="col-12" id="tempat_wisata">
               <div class="card recent-sales overflow-auto">
                 <div class="card-body">
-                  <h5 class="card-title">Datatables Progress Bimbingan</h5>
+                  <h5 class="card-title">Datatables Tempat Wisata</h5>
                   <!-- Table with stripped rows -->
                   <table class="table table-borderless datatable">
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Nama Mahasiswa</th>
-                        <th>Nama dosen pembimbing</th>
-                        <th>Nim Mahasiswa</th>
-                        <th>Nim Dosen</th>
-                        <th>View</th>
-                        <th>Delete</th>
+                        <th>Progres</th>
+                        <th>Status Persetujuan</th>
+                        <th>Unduh revisi</th>
                       </tr>
                     </thead>
-                    <tbody>
-                    <?php
-require_once "../config/config.php";
+                    <tr>
+        <td>1.</td>
+        <td>Pendahuluan</td>
+        <td>
+          <fieldset>
+            <input type="checkbox" disabled checked> Sampul depan
+            <br>
+            <input type="checkbox" disabled checked> Lembar judul
+            <br>
+            <input type="checkbox" disabled checked> Lembar pengesahan
+            <br>
+            <input type="checkbox" disabled checked> Abstrak
+            <br>
+            <input type="checkbox" disabled checked> Kata pengantar
+            <br>
+            <input type="checkbox" disabled checked> Daftar isi
+            <br>
+            <input type="checkbox" disabled checked> Daftar table
+            <br>
+            <input type="checkbox" disabled checked> Daftar gambar
+          </fieldset>
+        </td>
+        <td><a href="unduh_revisi.php?file=file_pendahuluan.pdf">Unduh Revisi</a></td>
+      </tr>
+      <tr>
+        <td>2.</td>
+        <td>BAB I</td>
+        <td>
+          <fieldset>
+            <input type="checkbox" disabled checked> a. Latar belakang
+            <br>
+            <input type="checkbox" disabled checked> b. Rumusan masalah
+            <br>
+            <input type="checkbox" disabled checked> c. Batasan masalah
+            <br>
+            <input type="checkbox" disabled checked> d. Tujuan
+            <br>
+            <input type="checkbox" disabled checked> e. Manfaat
+            <br>
+            <input type="checkbox" disabled checked> f. Sistematika Penulisan
+          </fieldset>
+        </td>
+        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+      </tr>
+      <tr>
+        <td>3.</td>
+        <td>BAB II</td>
+        <td>
+          <fieldset>
+            <input type="checkbox" disabled checked> a.	Tinjauan teori
+            <br>
+            <input type="checkbox" disabled checked> b.	Tinjauan Empiris
+          </fieldset>
+        </td>
+        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+      </tr>
+      <tr>
+        <td>4.</td>
+        <td>BAB III</td>
+        <td>
+          <fieldset>
+            <input type="checkbox" disabled checked> a.	Data dan Metode Pengumpulan Data
+            <br>
+            <input type="checkbox" disabled checked> b.	Desain sistem/Metode
+            <br>
+            <input type="checkbox" disabled checked> c.	Desain Evaluasi Sistem/Metode
+          </fieldset>
+        </td>
+        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+      </tr>
+      <tr>
+        <td>5.</td>
+        <td>BAB IV</td>
+        <td>
+          <fieldset>
+            <input type="checkbox" disabled checked> a.	Proses Pengumpulan Data
+            <br>
+            <input type="checkbox" disabled checked> b.	Implementasi Sistem/Metode
+            <br>
+            <input type="checkbox" disabled checked> c.	Implementasi Evaluasi Sistem/Metode
+          </fieldset>
+        </td>
+        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+      </tr>
+      <tr>
+        <td>6.</td>
+        <td>BAB V</td>
+        <td>
+          <fieldset>
+            <input type="checkbox" disabled checked> a.	Kesimpulan
+            <br>
+            <input type="checkbox" disabled checked> b.	Saran
+          </fieldset>
+        </td>
+        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+      </tr>
+      <tr>
+        <td>7.</td>
+        <td>Akhir</td>
+        <td>
+          <fieldset>
+            <input type="checkbox" disabled checked> a. Daftar Pustaka
+            <br>
+            <input type="checkbox" disabled checked> b. Tampilan
+          </fieldset>
+        </td>
+        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+      </tr>
+      <!-- Add more rows for other sections -->
+    <tbody>
 
-$query = "SELECT 
-            pb.id_progress,
-            m.nama_mahasiswa AS nama_mahasiswa,
-            d.nama_dosen AS nama_dosen,
-            m.NIM AS nim_mahasiswa,
-            d.NIP AS nim_dosen
-          FROM
-            progress_bimbingan pb
-            JOIN mahasiswa m ON pb.id_mahasiswa = m.id_mahasiswa
-            JOIN dosen d ON pb.id_dosen = d.id_dosen";
 
-
-$data = mysqli_query($host, $query);
-
-if ($data) {
-    if (mysqli_num_rows($data) > 0) {
-        $no = 1;
-        while ($row = mysqli_fetch_assoc($data)) {
-?>
-            <tr>
-                <td><?php echo $no; ?></td>
-                <td><?php echo $row["nama_mahasiswa"]; ?></td>
-                <td><?php echo $row["nama_dosen"]; ?></td>
-                <td><?php echo $row["nim_mahasiswa"]; ?></td>
-                <td><?php echo $row["nim_dosen"]; ?></td>
-                <td><a href="lihat-progress.php?id_progress=<?php echo $row['id_progress']; ?>" class="btn btn-success">View</a></td>
-                <td>
-                              <form action="proses.php" method="post">
-                              <input type="hidden" name="id_progress" value="<?php echo $row['id_progress']; ?>">
-                                <button class="btn btn-danger" type="submit" name="deletep">Delete</button>
-                              </form>
-                            </td>
-            </tr>
-<?php
-            $no++;
-        }
-    } else {
-        echo "No records found";
-    }
-} else {
-    echo "Error: " . mysqli_error($host);
-}
-
-// Don't forget to close the connection
-mysqli_close($host);
-?>
-                    </tbody>
+              </tbody>
                   </table>
                   <!-- End Table with stripped rows -->
                 </div>

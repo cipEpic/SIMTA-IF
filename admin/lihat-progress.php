@@ -173,21 +173,43 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
           <li class="breadcrumb-item">Tables Data</li>
-          <li class="breadcrumb-item active">Tables Data Tempat Wisata</li>
+          <li class="breadcrumb-item active">Tables Data Progress Bimbingan</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
-
+    
     <section class="section dashboard">
       <div class="row">
 
         <div class="col-lg">
           <div class="row">
 
-            <div class="col-12" id="tempat_wisata">
+            <div class="col-12" id="progress_bimbingan">
               <div class="card recent-sales overflow-auto">
                 <div class="card-body">
-                  <h5 class="card-title">Datatables Tempat Wisata</h5>
+                <?php
+                require_once "../config/config.php";
+
+                // Assuming you have the $id_progress variable set somewhere
+                $id_progress = $_GET['id_progress']; // Replace this with the appropriate way you set the id_progress variable
+
+                // Assuming you have a query to fetch data
+                $query = "SELECT progress_bimbingan.*, mahasiswa.nama_mahasiswa FROM progress_bimbingan
+                          INNER JOIN mahasiswa ON progress_bimbingan.id_mahasiswa = mahasiswa.id_mahasiswa
+                          WHERE progress_bimbingan.id_progress = $id_progress";
+
+                $result = mysqli_query($host, $query);
+
+                if (!$result) {
+                  die("Query failed: " . mysqli_error($host));
+                }
+
+                $row = mysqli_fetch_assoc($result);
+                $nama_mahasiswa = $row['nama_mahasiswa'] ?? ""; // Default value if nama_mahasiswa is NULL
+                ?>
+
+                <h5 class="card-title">Datatables progres bimbingan mahasiswa: <?php echo $nama_mahasiswa; ?></h5>
+
                   <!-- Table with stripped rows -->
                   <table class="table table-borderless datatable">
                     <thead>
@@ -198,116 +220,148 @@
                         <th>Unduh revisi</th>
                       </tr>
                     </thead>
-                    <tr>
-        <td>1.</td>
-        <td>Pendahuluan</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" disabled checked> Sampul depan
+                    <?php
+require_once "../config/config.php";
+
+// Assuming you have the $id_progress variable set somewhere
+$id_progress = $_GET['id_progress']; // Replace this with the appropriate way you set the id_progress variable
+
+// Assuming you have a query to fetch data
+$query = "SELECT * FROM progress_bimbingan WHERE id_progress = $id_progress";
+
+$result = mysqli_query($host, $query);
+
+if (!$result) {
+    die("Query failed: " . mysqli_error($host));
+}
+
+$row = mysqli_fetch_assoc($result);
+?>
+
+<tr>
+    <td>1.</td>
+    <td>Pendahuluan</td>
+    <td>
+        <fieldset>
+            <input type="checkbox" disabled <?= $row['sampul'] ? 'checked' : ''; ?>> Sampul depan
             <br>
-            <input type="checkbox" disabled checked> Lembar judul
+            <input type="checkbox" disabled <?= $row['l_judul'] ? 'checked' : ''; ?>> Lembar judul
             <br>
-            <input type="checkbox" disabled checked> Lembar pengesahan
+            <input type="checkbox" disabled <?= $row['l_pengesahan'] ? 'checked' : ''; ?>> Lembar pengesahan
             <br>
-            <input type="checkbox" disabled checked> Abstrak
+            <input type="checkbox" disabled <?= $row['abstrak'] ? 'checked' : ''; ?>> Abstrak
             <br>
-            <input type="checkbox" disabled checked> Kata pengantar
+            <input type="checkbox" disabled <?= $row['katpeng'] ? 'checked' : ''; ?>> Kata pengantar
             <br>
-            <input type="checkbox" disabled checked> Daftar isi
+            <input type="checkbox" disabled <?= $row['dafis'] ? 'checked' : ''; ?>> Daftar isi
             <br>
-            <input type="checkbox" disabled checked> Daftar table
+            <input type="checkbox" disabled <?= $row['daftab'] ? 'checked' : ''; ?>> Daftar table
             <br>
-            <input type="checkbox" disabled checked> Daftar gambar
-          </fieldset>
-        </td>
-        <td><a href="unduh_revisi.php?file=file_pendahuluan.pdf">Unduh Revisi</a></td>
-      </tr>
-      <tr>
+            <input type="checkbox" disabled <?= $row['dafgam'] ? 'checked' : ''; ?>> Daftar gambar
+            <!-- Repeat this for other checkboxes -->
+        </fieldset>
+    </td>
+    <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_pendahuluan']; ?>">Unduh Revisi</a></td>
+</tr>
+<!-- Repeat the above structure for other sections -->
+<tr>
         <td>2.</td>
         <td>BAB I</td>
         <td>
           <fieldset>
-            <input type="checkbox" disabled checked> a. Latar belakang
+          <input type="checkbox" disabled <?= $row['latbel'] ? 'checked' : ''; ?>> a. Latar belakang
             <br>
-            <input type="checkbox" disabled checked> b. Rumusan masalah
+            <input type="checkbox" disabled <?= $row['rumusan'] ? 'checked' : ''; ?>> b. Rumusan masalah
             <br>
-            <input type="checkbox" disabled checked> c. Batasan masalah
+            <input type="checkbox" disabled <?= $row['batasan'] ? 'checked' : ''; ?>> c. Batasan masalah
             <br>
-            <input type="checkbox" disabled checked> d. Tujuan
+            <input type="checkbox" disabled <?= $row['tujuan'] ? 'checked' : ''; ?>> d. Tujuan
             <br>
-            <input type="checkbox" disabled checked> e. Manfaat
+            <input type="checkbox" disabled <?= $row['manfaat'] ? 'checked' : ''; ?>> e. Manfaat
             <br>
-            <input type="checkbox" disabled checked> f. Sistematika Penulisan
+            <input type="checkbox" disabled <?= $row['sistematika_penulisan'] ? 'checked' : ''; ?>> f. Sistematika Penulisan
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+        <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab1']; ?>">Unduh Revisi</a></td>
       </tr>
       <tr>
         <td>3.</td>
         <td>BAB II</td>
         <td>
           <fieldset>
-            <input type="checkbox" disabled checked> a.	Tinjauan teori
+          <input type="checkbox" disabled <?= $row['teoritis'] ? 'checked' : ''; ?>> a.	Tinjauan teori
             <br>
-            <input type="checkbox" disabled checked> b.	Tinjauan Empiris
+            <input type="checkbox" disabled <?= $row['empiris'] ? 'checked' : ''; ?>> b.	Tinjauan Empiris
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+        <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab2']; ?>">Unduh Revisi</a></td>
       </tr>
       <tr>
         <td>4.</td>
         <td>BAB III</td>
         <td>
           <fieldset>
-            <input type="checkbox" disabled checked> a.	Data dan Metode Pengumpulan Data
+          <input type="checkbox" disabled <?= $row['metopen'] ? 'checked' : ''; ?>> a.	Data dan Metode Pengumpulan Data
             <br>
-            <input type="checkbox" disabled checked> b.	Desain sistem/Metode
+            <input type="checkbox" disabled <?= $row['desain_sistem'] ? 'checked' : ''; ?>> b.	Desain sistem/Metode
             <br>
-            <input type="checkbox" disabled checked> c.	Desain Evaluasi Sistem/Metode
+            <input type="checkbox" disabled <?= $row['desain_evaluasi'] ? 'checked' : ''; ?>> c.	Desain Evaluasi Sistem/Metode
+           
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+        <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab3']; ?>">Unduh Revisi</a></td>
       </tr>
       <tr>
         <td>5.</td>
         <td>BAB IV</td>
         <td>
           <fieldset>
-            <input type="checkbox" disabled checked> a.	Proses Pengumpulan Data
+          <input type="checkbox" disabled <?= $row['proses_kumpul_data'] ? 'checked' : ''; ?>> a.	Proses Pengumpulan Data
             <br>
-            <input type="checkbox" disabled checked> b.	Implementasi Sistem/Metode
+            <input type="checkbox" disabled <?= $row['implementasi_sistem'] ? 'checked' : ''; ?>> b.	Implementasi Sistem/Metode
             <br>
-            <input type="checkbox" disabled checked> c.	Implementasi Evaluasi Sistem/Metode
+            <input type="checkbox" disabled <?= $row['implementasi_evaluasi'] ? 'checked' : ''; ?>> c.	Implementasi Evaluasi Sistem/Metode
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+        <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab4']; ?>">Unduh Revisi</a></td>
       </tr>
       <tr>
         <td>6.</td>
         <td>BAB V</td>
         <td>
           <fieldset>
-            <input type="checkbox" disabled checked> a.	Kesimpulan
+          <input type="checkbox" disabled <?= $row['kesimpulan'] ? 'checked' : ''; ?>> a.	Kesimpulan
             <br>
-            <input type="checkbox" disabled checked> b.	Saran
+            <input type="checkbox" disabled <?= $row['saran'] ? 'checked' : ''; ?>> b.	Saran
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+        <<td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab5']; ?>">Unduh Revisi</a></td>
       </tr>
       <tr>
         <td>7.</td>
         <td>Akhir</td>
         <td>
           <fieldset>
-            <input type="checkbox" disabled checked> a. Daftar Pustaka
+          <input type="checkbox" disabled <?= $row['dafpus'] ? 'checked' : ''; ?>> a. Daftar Pustaka
             <br>
-            <input type="checkbox" disabled checked> b. Tampilan
+            <input type="checkbox" disabled <?= $row['lampiran'] ? 'checked' : ''; ?>> b. Lampiran
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=file_bab1.pdf">Unduh Revisi</a></td>
+        <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_akhir']; ?>">Unduh Revisi</a></td>
       </tr>
+<?php
+// Free the result set
+mysqli_free_result($result);
+
+// Close the connection
+mysqli_close($host);
+?>
+
       <!-- Add more rows for other sections -->
-    </tbody>
+    <tbody>
+
+
+              </tbody>
                   </table>
                   <!-- End Table with stripped rows -->
                 </div>
