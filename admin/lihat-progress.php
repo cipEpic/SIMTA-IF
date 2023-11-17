@@ -261,7 +261,10 @@ $row = mysqli_fetch_assoc($result);
             <!-- Repeat this for other checkboxes -->
         </fieldset>
     </td>
-    <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_pendahuluan']; ?>">Unduh Revisi</a></td>
+    <td>
+      <?php echo ($row['file_revisi_pendahuluan'] !== null) ? nl2br($row['file_revisi_pendahuluan']) : '-'; ?>
+    </td>
+
 </tr>
 <!-- Repeat the above structure for other sections -->
 <tr>
@@ -282,7 +285,10 @@ $row = mysqli_fetch_assoc($result);
             <input type="checkbox" disabled <?= $row['sistematika_penulisan'] ? 'checked' : ''; ?>> f. Sistematika Penulisan
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab1']; ?>">Unduh Revisi</a></td>
+        <!-- <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab1']; ?>">Unduh Revisi</a></td> -->
+        <td>
+          <?php echo ($row['file_revisi_bab1'] !== null) ? nl2br($row['file_revisi_bab1']) : '-'; ?>
+        </td>
       </tr>
       <tr>
         <td>3.</td>
@@ -294,7 +300,10 @@ $row = mysqli_fetch_assoc($result);
             <input type="checkbox" disabled <?= $row['empiris'] ? 'checked' : ''; ?>> b.	Tinjauan Empiris
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab2']; ?>">Unduh Revisi</a></td>
+        <!-- <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab2']; ?>">Unduh Revisi</a></td> -->
+        <td>
+          <?php echo ($row['file_revisi_bab2'] !== null) ? nl2br($row['file_revisi_bab2']) : '-'; ?>
+        </td>
       </tr>
       <tr>
         <td>4.</td>
@@ -309,7 +318,10 @@ $row = mysqli_fetch_assoc($result);
            
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab3']; ?>">Unduh Revisi</a></td>
+        <!-- <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab3']; ?>">Unduh Revisi</a></td> -->
+        <td>
+          <?php echo ($row['file_revisi_bab3'] !== null) ? nl2br($row['file_revisi_bab3']) : '-'; ?>
+        </td>
       </tr>
       <tr>
         <td>5.</td>
@@ -323,7 +335,10 @@ $row = mysqli_fetch_assoc($result);
             <input type="checkbox" disabled <?= $row['implementasi_evaluasi'] ? 'checked' : ''; ?>> c.	Implementasi Evaluasi Sistem/Metode
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab4']; ?>">Unduh Revisi</a></td>
+        <!-- <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab4']; ?>">Unduh Revisi</a></td> -->
+        <td>
+          <?php echo ($row['file_revisi_bab4'] !== null) ? nl2br($row['file_revisi_bab4']) : '-'; ?>
+        </td>
       </tr>
       <tr>
         <td>6.</td>
@@ -335,7 +350,10 @@ $row = mysqli_fetch_assoc($result);
             <input type="checkbox" disabled <?= $row['saran'] ? 'checked' : ''; ?>> b.	Saran
           </fieldset>
         </td>
-        <<td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab5']; ?>">Unduh Revisi</a></td>
+        <!-- <<td><a href="unduh_revisi.php?file=<?= $row['file_revisi_bab5']; ?>">Unduh Revisi</a></td> -->
+        <td>
+          <?php echo ($row['file_revisi_bab5'] !== null) ? nl2br($row['file_revisi_bab5']) : '-'; ?>
+        </td>
       </tr>
       <tr>
         <td>7.</td>
@@ -347,7 +365,10 @@ $row = mysqli_fetch_assoc($result);
             <input type="checkbox" disabled <?= $row['lampiran'] ? 'checked' : ''; ?>> b. Lampiran
           </fieldset>
         </td>
-        <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_akhir']; ?>">Unduh Revisi</a></td>
+        <!-- <td><a href="unduh_revisi.php?file=<?= $row['file_revisi_akhir']; ?>">Unduh Revisi</a></td> -->
+        <td>
+          <?php echo ($row['file_revisi_akhir'] !== null) ? nl2br($row['file_revisi_akhir']) : '-'; ?>
+        </td>
       </tr>
 <?php
 // Free the result set

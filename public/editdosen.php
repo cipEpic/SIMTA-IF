@@ -80,138 +80,197 @@
                 <div class="card-header">
                 <h3 class="card-title">Progress Bimbingan nama mahasiswa</h3>
                 </div>
-                                
-            <form id="customerForm" action="prosesedit-jquery.php?id_product=<?php echo $id_product; ?>" method="post">
-                <table class="table table-striped" border="1">
-                <tr>
-        <th>No.</th>
-        <th>Progres</th>
-        <th>Status Persetujuan</th>
-        <th>Unggah Revisi</th>
-      </tr>
-      <tr>
-        <td>1.</td>
-        <td>Pendahuluan</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" name="progress[]" value="Sampul depan"> Sampul depan
-            <br>
-            <input type="checkbox" name="progress[]" value="Lembar judul"> Lembar judul
-            <br>
-            <input type="checkbox" name="progress[]" value="Lembar pengesahan"> Lembar pengesahan
-            <br>
-            <input type="checkbox" name="progress[]" value="Abstrak"> Abstrak
-            <br>
-            <input type="checkbox" name="progress[]" value="Kata pengantar"> Kata pengantar
-            <br>
-            <input type="checkbox" name="progress[]" value="Daftar isi"> Daftar isi
-            <br>
-            <input type="checkbox" name="progress[]" value="Daftar table"> Daftar table
-            <br>
-            <input type="checkbox" name="progress[]" value="Daftar gambar"> Daftar gambar
-          </fieldset>
-        </td>
-        <td><input type="file" name="file_pendahuluan"></td>
-      </tr>
-      <tr>
-        <td>2.</td>
-        <td>BAB I</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Latar belakang
-            <br>
-            <input type="checkbox" name "progress[]" value="Rumusan masalah"> b. Rumusan masalah
-            <br>
-            <input type="checkbox" name="progress[]" value="Batasan masalah"> c. Batasan masalah
-            <br>
-            <input type="checkbox" name="progress[]" value="Tujuan"> d. Tujuan
-            <br>
-            <input type="checkbox" name="progress[]" value="Manfaat"> e. Manfaat
-            <br>
-            <input type="checkbox" name="progress[]" value="Sistematika Penulisan"> f. Sistematika Penulisan
-          </fieldset>
-        </td>
-        <td><input type="file" name="file_Bab1"></td>
-      </tr>
-      <tr>
-        <td>3.</td>
-        <td>BAB II</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" name="progress[]" value="Tinjauan teori"> a. Tinjauan teori
-            <br>
-            <input type="checkbox" name="progress[]" value="Tinjauan Empiris"> b. Tinjauan Empiris
-          </fieldset>
-        </td>
-        <td><input type="file" name="file_Bab2"></td>
-      </tr>
-      <tr>
-        <td>4.</td>
-        <td>BAB III</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Data dan Metode Pengumpulan Data
-            <br>
-            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Desain sistem/Metode
-            <br>
-            <input type="checkbox" name="progress[]" value="Batasan masalah"> c. Desain Evaluasi Sistem/Metode
-          </fieldset>
-        </td>
-        <td><input type="file" name="file_Bab3"></td>
-      </tr>
-      <tr>
-        <td>5.</td>
-        <td>BAB IV</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Proses Pengumpulan Data
-            <br>
-            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Implementasi Sistem/Metode
-            <br>
-            <input type="checkbox" name="progress[]" value="Batasan masalah"> c. Implementasi Evaluasi Sistem/Metode
-          </fieldset>
-        </td>
-        <td><input type="file" name="file_bab4"></td>
-      </tr>
-      <tr>
-        <td>6.</td>
-        <td>BAB V</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Kesimpulan
-            <br>
-            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Saran
-          </fieldset>
-        </td>
-        <td><input type="file" name="file_bab5"></td>
-      </tr>
-      <tr>
-        <td>7.</td>
-        <td>Akhir</td>
-        <td>
-          <fieldset>
-            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Daftar Pustaka
-            <br>
-            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Lampiran
-          </fieldset>
-        </td>
-        <td><input type="file" name="file_akhir"></td>
-      </tr>
-                        
-                    </tbody>
-                </table>
-                <tr>
-                            <td></td>
-                            <td><input type="submit" name="Submit" value="edit" class="btn btn-danger"></td>
-                        </tr>
-            </form>
+                <?php
+// Define or retrieve $id_mahasiswa before this point
+$id_mahasiswa = $_GET['id_mahasiswa']; // Example, adjust based on your implementation
+?>             
+                <form id="dosenForm" action="proses_update_bimbingan.php" method="post">
+                <!-- Tambahkan input hidden untuk menyimpan id_mahasiswa -->
+                <input type="hidden" name="id_mahasiswa" value="<?php echo $id_mahasiswa; ?>">
+                <!-- Tambahkan input hidden untuk menyimpan id_progress -->
+                <input type="hidden" name="id_progress" value="<?php echo $data['id_progress']; ?>">
+
+
+            <table class="table table-striped" border="1">
+
+                <?php
+                // Ambil data dari database
+                require_once "../config/config.php";
+
+                 // Pastikan id_mahasiswa sudah terdefinisi, atau berikan nilai default jika belum
+                  $id_mahasiswa = isset($_GET['id_mahasiswa']) ? $_GET['id_mahasiswa'] : 0;
+
+                // Gantilah "nama_tabel" dan "id_mahasiswa" dengan nama tabel dan id yang sesuai di database Anda
+                $query = "SELECT * FROM progress_bimbingan WHERE id_mahasiswa = $id_mahasiswa";
+                // Eksekusi query dan ambil hasilnya
+                $result = mysqli_query($host, $query);
+
+                // Pengecekan hasil query
+                if ($result) {
+                    $data = mysqli_fetch_assoc($result);
+
+                    // Cek apakah $data mengandung kunci yang diperlukan
+                    if (!empty($data)) {
+                        ?>
+
+                      <tr>
+                        <th>No.</th>
+                        <th>Progres</th>
+                        <th>Status Persetujuan</th>
+                        <th>Unggah Revisi</th>
+                      </tr>
+                      <tr>
+                        <td>1.</td>
+                        <td>Pendahuluan</td>
+                        <td>
+                          <fieldset>
+                            <input type="checkbox" name="progress[]" value="sampul" <?php echo $data['sampul'] == 1 ? 'checked' : ''; ?>> Sampul depan
+                            <br>
+                            <input type="checkbox" name="progress[]" value="l_judul" <?php echo $data['l_judul'] == 1 ? 'checked' : ''; ?>> Lembar judul
+                            <br>
+                            <input type="checkbox" name="progress[]" value="l_pengesahan"<?php echo $data['l_pengesahan'] == 1 ? 'checked' : ''; ?>> Lembar pengesahan
+                            <br>
+                            <input type="checkbox" name="progress[]" value="abstrak"<?php echo $data['abstrak'] == 1 ? 'checked' : ''; ?>> Abstrak
+                            <br>
+                            <input type="checkbox" name="progress[]" value="katpeng"<?php echo $data['katpeng'] == 1 ? 'checked' : ''; ?>> Kata pengantar
+                            <br>
+                            <input type="checkbox" name="progress[]" value="dafis"<?php echo $data['dafis'] == 1 ? 'checked' : ''; ?>> Daftar isi
+                            <br>
+                            <input type="checkbox" name="progress[]" value="daftab"<?php echo $data['daftab'] == 1 ? 'checked' : ''; ?>> Daftar table
+                            <br>
+                            <input type="checkbox" name="progress[]" value="dafgam"<?php echo $data['dafgam'] == 1 ? 'checked' : ''; ?>> Daftar gambar
+                          </fieldset>
+                        </td>
+                        <!-- <td><input type="text" name="file_pendahuluan"></td> -->
+                        <td><textarea name="file_pendahuluan"><?php echo ($data['file_revisi_pendahuluan'] !== null) ? $data['file_revisi_pendahuluan'] : ''; ?></textarea></td>
+
+                      </tr>
+                      <tr>
+                        <td>2.</td>
+                        <td>BAB I</td>
+                        <td>
+                          <fieldset>
+                            <input type="checkbox" name="progress[]" value="latbel" <?php echo $data['latbel'] == 1 ? 'checked' : ''; ?>> a. Latar belakang
+                            <br>
+                            <input type="checkbox" name= "progress[]" value="rumusan" <?php echo $data['rumusan'] == 1 ? 'checked' : ''; ?>> b. Rumusan masalah
+                            <br>
+                            <input type="checkbox" name="progress[]" value="batasan" <?php echo $data['batasan'] == 1 ? 'checked' : ''; ?>> c. Batasan masalah
+                            <br>
+                            <input type="checkbox" name="progress[]" value="tujuan" <?php echo $data['tujuan'] == 1 ? 'checked' : ''; ?>> d. Tujuan
+                            <br>
+                            <input type="checkbox" name="progress[]" value="manfaat" <?php echo $data['manfaat'] == 1 ? 'checked' : ''; ?>> e. Manfaat
+                            <br>
+                            <input type="checkbox" name="progress[]" value="sistematika_penulisan" <?php echo $data['sistematika_penulisan'] == 1 ? 'checked' : ''; ?>> f. Sistematika Penulisan
+                          </fieldset>
+                        </td>
+                        <!-- <td><input type="text" name="file_Bab1"></td> -->
+                        <!-- <td><textarea name="file_bab1"><?php echo ($data['file_bab1'] !== null) ? $data['file_bab1'] : ''; ?></textarea></td> -->
+                        <td><textarea name="file_bab1"><?php echo isset($data['file_bab1']) ? $data['file_bab1'] : ''; ?></textarea></td>
+                      </tr>
+                      <tr>
+                        <td>3.</td>
+                        <td>BAB II</td>
+                        <td>
+                          <fieldset>
+                            <input type="checkbox" name="progress[]" value="teoritis" <?php echo $data['teoritis'] == 1 ? 'checked' : ''; ?>> a. Tinjauan teori
+                            <br>
+                            <input type="checkbox" name="progress[]" value="empiris" <?php echo $data['empiris'] == 1 ? 'checked' : ''; ?>> b. Tinjauan Empiris
+                          </fieldset>
+                        </td>
+                        <!-- <td><input type="text" name="file_Bab2"></td> -->
+                        <!-- <td><textarea name="file_bab2"><?php echo ($data['file_bab2'] !== null) ? $data['file_bab2'] : ''; ?></textarea></td> -->
+                        <td><textarea name="file_bab2"><?php echo isset($data['file_bab2']) ? $data['file_bab2'] : ''; ?></textarea></td>
+
+                      </tr>
+                      <tr>
+                        <td>4.</td>
+                        <td>BAB III</td>
+                        <td>
+                          <fieldset>
+                            <input type="checkbox" name="progress[]" value="metopen" <?php echo $data['metopen'] == 1 ? 'checked' : ''; ?>> a. Data dan Metode Pengumpulan Data
+                            <br>
+                            <input type="checkbox" name="progress[]" value="desain_sistem" <?php echo $data['desain_sistem'] == 1 ? 'checked' : ''; ?>> b. Desain sistem/Metode
+                            <br>
+                            <input type="checkbox" name="progress[]" value="desain_evaluasi" <?php echo $data['desain_evaluasi'] == 1 ? 'checked' : ''; ?>> c. Desain Evaluasi Sistem/Metode
+                          </fieldset>
+                        </td>
+                        <!-- <td><input type="text" name="file_Bab3"></td> -->
+                        <!-- <td><textarea name="file_bab3"><?php echo ($data['file_bab3'] !== null) ? $data['file_bab3'] : ''; ?></textarea></td> -->
+                        <td><textarea name="file_bab3"><?php echo isset($data['file_bab3']) ? $data['file_bab3'] : ''; ?></textarea></td>
+
+                      </tr>
+                      <tr>
+                        <td>5.</td>
+                        <td>BAB IV</td>
+                        <td>
+                          <fieldset>
+                            <input type="checkbox" name="progress[]" value="proses_kumpul_data" <?php echo $data['proses_kumpul_data'] == 1 ? 'checked' : ''; ?>> a. Proses Pengumpulan Data
+                            <br>
+                            <input type="checkbox" name="progress[]" value="implementasi_sistem" <?php echo $data['implementasi_sistem'] == 1 ? 'checked' : ''; ?>> b. Implementasi Sistem/Metode
+                            <br>
+                            <input type="checkbox" name="progress[]" value="implementasi_evaluasi" <?php echo $data['implementasi_evaluasi'] == 1 ? 'checked' : ''; ?>> c. Implementasi Evaluasi Sistem/Metode
+                          </fieldset>
+                        </td>
+                        <!-- <td><input type="text" name="file_bab4"></td> -->
+                        <!-- <td><textarea name="file_bab4"><?php echo ($data['file_bab4'] !== null) ? $data['file_bab4'] : ''; ?></textarea></td> -->
+                        <td><textarea name="file_bab4"><?php echo isset($data['file_bab4']) ? $data['file_bab4'] : ''; ?></textarea></td>
+
+                      </tr>
+                      <tr>
+                        <td>6.</td>
+                        <td>BAB V</td>
+                        <td>
+                          <fieldset>
+                            <input type="checkbox" name="progress[]" value="kesimpulan" <?php echo $data['kesimpulan'] == 1 ? 'checked' : ''; ?>> a. Kesimpulan
+                            <br>
+                            <input type="checkbox" name="progress[]" value="saran" <?php echo $data['saran'] == 1 ? 'checked' : ''; ?>> b. Saran
+                          </fieldset>
+                        </td>
+                        <!-- <td><input type="text" name="file_bab5"></td> -->
+                        <!-- <td><textarea name="file_bab5"><?php echo ($data['file_bab5'] !== null) ? $data['file_bab5'] : ''; ?></textarea></td> -->
+                        <td><textarea name="file_bab5"><?php echo isset($data['file_bab5']) ? $data['file_bab5'] : ''; ?></textarea></td>
+
+                      </tr>
+                      <tr>
+                        <td>7.</td>
+                        <td>Akhir</td>
+                        <td>
+                          <fieldset>
+                            <input type="checkbox" name="progress[]" value="dafpus" <?php echo $data['dafpus'] == 1 ? 'checked' : ''; ?>> a. Daftar Pustaka
+                            <br>
+                            <input type="checkbox" name="progress[]" value="lampiran" <?php echo $data['lampiran'] == 1 ? 'checked' : ''; ?>> b. Lampiran
+                          </fieldset>
+                        </td>
+                        <!-- <td><input type="text" name="file_akhir"></td> -->
+                        <!-- <td><textarea name="file_akhir"><?php echo ($data['file_akhir'] !== null) ? $data['file_akhir'] : ''; ?></textarea></td> -->
+                        <td><textarea name="file_akhir"><?php echo isset($data['file_akhir']) ? $data['file_akhir'] : ''; ?></textarea></td>
+
+                      </tr>
+                                        
+                                    </tbody>
+                                </table>
+                                <tr>
+                                <td></td>
+                                <td><input type="submit" name="Submit" value="edit" class="btn btn-danger"></td>
+                                        </tr>
+
+
+                                        <?php
+                    } else {
+                        echo "Data not found."; // Outputkan pesan jika data tidak ditemukan
+                    }
+                } else {
+                    echo "Error in query: " . mysqli_error($host); // Outputkan pesan kesalahan query
+                }
+                ?>
+                            </form>
             </div>
         </div>
 	</div>
     
     <script>
         $(document).ready(function() {
-            $('#customerForm').submit(function(e) {
+            $('#dosenForm').submit(function(e) {
                 e.preventDefault(); // Mencegah pengiriman form
 
                 // Menghapus pesan error yang mungkin ada

@@ -78,187 +78,173 @@
         <div class="col-12">
 			<div class="card p-lg-5">
                 <div class="card-header">
-                <?php
-                require_once "../config/config.php";
-
-                // Assuming you have the $id_progress variable set somewhere
-                $id_mahasiswa = $_GET['id_mahasiswa']; // Replace this with the appropriate way you set the id_progress variable
-
-                // Assuming you have a query to fetch data
-                $query = "SELECT progress_bimbingan.*, mahasiswa.nama_mahasiswa FROM progress_bimbingan
-                INNER JOIN mahasiswa ON progress_bimbingan.id_mahasiswa = mahasiswa.id_mahasiswa
-                WHERE progress_bimbingan.id_mahasiswa = $id_mahasiswa";
-
-                $result = mysqli_query($host, $query);
-
-                if (!$result) {
-                die("Query failed: " . mysqli_error($host));
-                }
-
-                $row = mysqli_fetch_assoc($result);
-                $nama_mahasiswa = $row['nama_mahasiswa'] ?? ""; // Default value if nama_mahasiswa is NULL
-
-                ?>
-                    <h2>Selamat datang, <?php echo $nama_mahasiswa; ?></h2>
-                    <h3>Progress Bimbingan Anda</h3>
+                <h3 class="card-title">Progress Bimbingan nama mahasiswa</h3>
                 </div>
                                 
             <form id="customerForm" action="prosesedit-jquery.php?id_product=<?php echo $id_product; ?>" method="post">
                 <table class="table table-striped" border="1">
                 <tr>
-                  <th>No.</th>
-                  <th>Progres</th>
-                  <th>Status Persetujuan</th>
-                  <th>Unduh Revisi</th>
-                </tr>
-
-                <?php
-                require_once "../config/config.php";
-
-                // Assuming you have the $id_progress variable set somewhere
-                $id_mahasiswa = $_GET['id_mahasiswa']; // Replace this with the appropriate way you set the id_progress variable
-
-                // Assuming you have a query to fetch data
-                $query = "SELECT * FROM progress_bimbingan WHERE id_mahasiswa = $id_mahasiswa";
-
-                $result = mysqli_query($host, $query);
-
-                if (!$result) {
-                    die("Query failed: " . mysqli_error($host));
-                }
-
-                $row = mysqli_fetch_assoc($result);
-
-                ?>
+        <th>No.</th>
+        <th>Progres</th>
+        <th>Status Persetujuan</th>
+        <th>Unggah Revisi</th>
+      </tr>
       <tr>
-    <td>1.</td>
-    <td>Pendahuluan</td>
-    <td>
-        <fieldset>
-            <input type="checkbox" disabled <?= $row['sampul'] ? 'checked' : ''; ?>> Sampul depan
+        <td>1.</td>
+        <td>Pendahuluan</td>
+        <td>
+          <fieldset>
+            <input type="checkbox" name="progress[]" value="Sampul depan"> Sampul depan
             <br>
-            <input type="checkbox" disabled <?= $row['l_judul'] ? 'checked' : ''; ?>> Lembar judul
+            <input type="checkbox" name="progress[]" value="Lembar judul"> Lembar judul
             <br>
-            <input type="checkbox" disabled <?= $row['l_pengesahan'] ? 'checked' : ''; ?>> Lembar pengesahan
+            <input type="checkbox" name="progress[]" value="Lembar pengesahan"> Lembar pengesahan
             <br>
-            <input type="checkbox" disabled <?= $row['abstrak'] ? 'checked' : ''; ?>> Abstrak
+            <input type="checkbox" name="progress[]" value="Abstrak"> Abstrak
             <br>
-            <input type="checkbox" disabled <?= $row['katpeng'] ? 'checked' : ''; ?>> Kata pengantar
+            <input type="checkbox" name="progress[]" value="Kata pengantar"> Kata pengantar
             <br>
-            <input type="checkbox" disabled <?= $row['dafis'] ? 'checked' : ''; ?>> Daftar isi
+            <input type="checkbox" name="progress[]" value="Daftar isi"> Daftar isi
             <br>
-            <input type="checkbox" disabled <?= $row['daftab'] ? 'checked' : ''; ?>> Daftar table
+            <input type="checkbox" name="progress[]" value="Daftar table"> Daftar table
             <br>
-            <input type="checkbox" disabled <?= $row['dafgam'] ? 'checked' : ''; ?>> Daftar gambar
-            <!-- Repeat this for other checkboxes -->
-        </fieldset>
-    </td>
-    <td><?php echo ($row['file_revisi_pendahuluan'] !== null) ? nl2br($row['file_revisi_pendahuluan']) : '-'; ?></td>
-</tr>
-<!-- Repeat the above structure for other sections -->
-<tr>
+            <input type="checkbox" name="progress[]" value="Daftar gambar"> Daftar gambar
+          </fieldset>
+        </td>
+        <td><input type="file" name="file_pendahuluan"></td>
+      </tr>
+      <tr>
         <td>2.</td>
         <td>BAB I</td>
         <td>
           <fieldset>
-          <input type="checkbox" disabled <?= $row['latbel'] ? 'checked' : ''; ?>> a. Latar belakang
+            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Latar belakang
             <br>
-            <input type="checkbox" disabled <?= $row['rumusan'] ? 'checked' : ''; ?>> b. Rumusan masalah
+            <input type="checkbox" name= "progress[]" value="Rumusan masalah"> b. Rumusan masalah
             <br>
-            <input type="checkbox" disabled <?= $row['batasan'] ? 'checked' : ''; ?>> c. Batasan masalah
+            <input type="checkbox" name="progress[]" value="Batasan masalah"> c. Batasan masalah
             <br>
-            <input type="checkbox" disabled <?= $row['tujuan'] ? 'checked' : ''; ?>> d. Tujuan
+            <input type="checkbox" name="progress[]" value="Tujuan"> d. Tujuan
             <br>
-            <input type="checkbox" disabled <?= $row['manfaat'] ? 'checked' : ''; ?>> e. Manfaat
+            <input type="checkbox" name="progress[]" value="Manfaat"> e. Manfaat
             <br>
-            <input type="checkbox" disabled <?= $row['sistematika_penulisan'] ? 'checked' : ''; ?>> f. Sistematika Penulisan
+            <input type="checkbox" name="progress[]" value="Sistematika Penulisan"> f. Sistematika Penulisan
           </fieldset>
         </td>
-        <td><?php echo ($row['file_revisi_bab1'] !== null) ? nl2br($row['file_revisi_bab1']) : '-'; ?></td>
+        <td><input type="file" name="file_Bab1"></td>
       </tr>
       <tr>
         <td>3.</td>
         <td>BAB II</td>
         <td>
           <fieldset>
-          <input type="checkbox" disabled <?= $row['teoritis'] ? 'checked' : ''; ?>> a.	Tinjauan teori
+            <input type="checkbox" name="progress[]" value="Tinjauan teori"> a. Tinjauan teori
             <br>
-            <input type="checkbox" disabled <?= $row['empiris'] ? 'checked' : ''; ?>> b.	Tinjauan Empiris
+            <input type="checkbox" name="progress[]" value="Tinjauan Empiris"> b. Tinjauan Empiris
           </fieldset>
         </td>
-        <td><?php echo ($row['file_revisi_bab2'] !== null) ? nl2br($row['file_revisi_bab2']) : '-'; ?></td>
+        <td><input type="file" name="file_Bab2"></td>
       </tr>
       <tr>
         <td>4.</td>
         <td>BAB III</td>
         <td>
           <fieldset>
-          <input type="checkbox" disabled <?= $row['metopen'] ? 'checked' : ''; ?>> a.	Data dan Metode Pengumpulan Data
+            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Data dan Metode Pengumpulan Data
             <br>
-            <input type="checkbox" disabled <?= $row['desain_sistem'] ? 'checked' : ''; ?>> b.	Desain sistem/Metode
+            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Desain sistem/Metode
             <br>
-            <input type="checkbox" disabled <?= $row['desain_evaluasi'] ? 'checked' : ''; ?>> c.	Desain Evaluasi Sistem/Metode
-           
+            <input type="checkbox" name="progress[]" value="Batasan masalah"> c. Desain Evaluasi Sistem/Metode
           </fieldset>
         </td>
-        <td><?php echo ($row['file_revisi_bab3'] !== null) ? nl2br($row['file_revisi_bab3']) : '-'; ?></td>
+        <td><input type="file" name="file_Bab3"></td>
       </tr>
       <tr>
         <td>5.</td>
         <td>BAB IV</td>
         <td>
           <fieldset>
-          <input type="checkbox" disabled <?= $row['proses_kumpul_data'] ? 'checked' : ''; ?>> a.	Proses Pengumpulan Data
+            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Proses Pengumpulan Data
             <br>
-            <input type="checkbox" disabled <?= $row['implementasi_sistem'] ? 'checked' : ''; ?>> b.	Implementasi Sistem/Metode
+            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Implementasi Sistem/Metode
             <br>
-            <input type="checkbox" disabled <?= $row['implementasi_evaluasi'] ? 'checked' : ''; ?>> c.	Implementasi Evaluasi Sistem/Metode
+            <input type="checkbox" name="progress[]" value="Batasan masalah"> c. Implementasi Evaluasi Sistem/Metode
           </fieldset>
         </td>
-        <td><?php echo ($row['file_revisi_bab4'] !== null) ? nl2br($row['file_revisi_bab4']) : '-'; ?></td>
+        <td><input type="file" name="file_bab4"></td>
       </tr>
       <tr>
         <td>6.</td>
         <td>BAB V</td>
         <td>
           <fieldset>
-          <input type="checkbox" disabled <?= $row['kesimpulan'] ? 'checked' : ''; ?>> a.	Kesimpulan
+            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Kesimpulan
             <br>
-            <input type="checkbox" disabled <?= $row['saran'] ? 'checked' : ''; ?>> b.	Saran
+            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Saran
           </fieldset>
         </td>
-        <<td><?php echo ($row['file_revisi_bab5'] !== null) ? nl2br($row['file_revisi_bab5']) : '-'; ?></td>
+        <td><input type="file" name="file_bab5"></td>
       </tr>
       <tr>
         <td>7.</td>
         <td>Akhir</td>
         <td>
           <fieldset>
-          <input type="checkbox" disabled <?= $row['dafpus'] ? 'checked' : ''; ?>> a. Daftar Pustaka
+            <input type="checkbox" name="progress[]" value="Latar belakang"> a. Daftar Pustaka
             <br>
-            <input type="checkbox" disabled <?= $row['lampiran'] ? 'checked' : ''; ?>> b. Lampiran
+            <input type="checkbox" name="progress[]" value="Rumusan masalah"> b. Lampiran
           </fieldset>
         </td>
-        <td><?php echo ($row['file_revisi_akhir'] !== null) ? nl2br($row['file_revisi_akhir']) : '-'; ?></td>
+        <td><input type="file" name="file_akhir"></td>
       </tr>
-<?php
-// Free the result set
-mysqli_free_result($result);
-
-// Close the connection
-mysqli_close($host);
-?>
                         
                     </tbody>
                 </table>
-                
+                <tr>
+                            <td></td>
+                            <td><input type="submit" name="Submit" value="edit" class="btn btn-danger"></td>
+                        </tr>
             </form>
             </div>
         </div>
 	</div>
+    
+    <script>
+        $(document).ready(function() {
+            $('#customerForm').submit(function(e) {
+                e.preventDefault(); // Mencegah pengiriman form
 
-  <!-- Footer -->
-  <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">
+                // Menghapus pesan error yang mungkin ada
+                $('.error').remove();
+
+                // Cek setiap input dengan class "required"
+                $('.required').each(function() {
+                    if ($(this).val() === '') {
+                        // Mendapatkan nama kolom dari label input
+                        var columnName = $(this).closest('tr').find('td:first').text();
+
+                        // Jika input kosong, tambahkan pesan error dan beri warna merah di kolomnya
+                        $(this).after('<span class="error">' + columnName + ' is required</span>');
+                        $(this).css('border-color', 'red');
+                    }
+                });
+
+                // Jika tidak ada input yang kosong, submit form
+                if ($('.error').length === 0) {
+                    $(this).unbind('submit').submit();
+                }
+            });
+
+            // Menghapus pesan error dan warna merah saat input diubah
+            $('.required').keyup(function() {
+                $(this).next('.error').remove();
+                $(this).css('border-color', '');
+            });
+        });
+    </script>
+
+   <!-- Footer -->
+   <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">
     <!-- Section: Social media -->
     <section class="d-flex justify-content-between p-4" style="background-color: #6351ce">
       <!-- Left -->

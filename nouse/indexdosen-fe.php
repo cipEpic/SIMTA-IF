@@ -96,41 +96,28 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+        <!-- Example data -->
+        <tr>
+            <td>1</td>
+            <td>123456</td>
+            <td>John Doe</td>
+            <td>
+                <!-- Add any action buttons or links here -->
+                <a class="btn btn-primary" href="editdosen.php">Edit</a>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>789012</td>
+            <td>Jane Doe</td>
+            <td>
+                <!-- Add any action buttons or links here -->
+                <a class="btn btn-primary" href="editdosen.php">Edit</a>
+            </td>
+        </tr>
+        <!-- Add more rows as needed -->
 
-                                        <?php
-                                        require_once "../config/config.php";
-
-                                        // Query untuk mengambil data mahasiswa yang diampu oleh dosen tertentu
-                                        // $id_dosen = 1; 
-                                        $id_dosen = $_GET['id_dosen']; // Ganti dengan ID dosen yang sesuai
-                                        // Query untuk mengambil data mahasiswa yang direvisi oleh dosen tertentu
-                                        $query = "SELECT m.id_mahasiswa, m.NIM, m.nama_mahasiswa
-                                        FROM mahasiswa m
-                                        JOIN progress_bimbingan p ON m.id_mahasiswa = p.id_mahasiswa
-                                        WHERE p.id_dosen = $id_dosen";
-                                        $result = $host->query($query);
-
-                                        // Tutup koneksi database
-                                        $host->close();
-                                        ?>
-                                        <?php
-                                        if ($result->num_rows > 0) {
-                                            $no = 1;
-                                            while ($row = $result->fetch_assoc()) {
-                                                echo "<tr>";
-                                                echo "<td>" . $no . "</td>";
-                                                echo "<td>" . $row['NIM'] . "</td>";
-                                                echo "<td>" . $row['nama_mahasiswa'] . "</td>";
-                                                echo "<td><a class='btn btn-primary' href='editdosen.php?id_mahasiswa=" . $row['id_mahasiswa'] . "'>Edit</a></td>";
-                                                echo "</tr>";
-                                                $no++;
-                                            }
-                                        } else {
-                                            echo "<tr><td colspan='4'>Tidak ada data mahasiswa</td></tr>";
-                                        }
-                                        ?>
-
-                                        </tbody>
+    </tbody>
                                         <tfoot>
                                             <tr>
                                             <th>No</th>
