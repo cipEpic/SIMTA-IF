@@ -95,23 +95,11 @@ $id_mahasiswa = $_GET['id_mahasiswa']; // Example, adjust based on your implemen
 
                 <?php
                 // Ambil data dari database
-                require_once "../config/config.php";
-
-                 // Pastikan id_mahasiswa sudah terdefinisi, atau berikan nilai default jika belum
-                  $id_mahasiswa = isset($_GET['id_mahasiswa']) ? $_GET['id_mahasiswa'] : 0;
-
-                // Gantilah "nama_tabel" dan "id_mahasiswa" dengan nama tabel dan id yang sesuai di database Anda
-                $query = "SELECT * FROM progress_bimbingan WHERE id_mahasiswa = $id_mahasiswa";
-                // Eksekusi query dan ambil hasilnya
-                $result = mysqli_query($host, $query);
-
-                // Pengecekan hasil query
-                if ($result) {
-                    $data = mysqli_fetch_assoc($result);
-
-                    // Cek apakah $data mengandung kunci yang diperlukan
-                    if (!empty($data)) {
-                        ?>
+                      require_once "../config/config.php";
+                      $id_mahasiswa = $_GET['id_mahasiswa'];
+                      $query = mysqli_query($host, "SELECT * FROM progress_bimbingan WHERE id_mahasiswa='$id_mahasiswa'");
+                      foreach ($query as $row) {
+                      ?>
 
                       <tr>
                         <th>No.</th>
@@ -124,25 +112,25 @@ $id_mahasiswa = $_GET['id_mahasiswa']; // Example, adjust based on your implemen
                         <td>Pendahuluan</td>
                         <td>
                           <fieldset>
-                            <input type="checkbox" name="progress[]" value="sampul" <?php echo $data['sampul'] == 1 ? 'checked' : ''; ?>> Sampul depan
+                            <input type="checkbox" name="sampul"   value= "<?php echo $row['sampul'] == 1 ? '1' : '0'; ?>" id="sampul" > Sampul depan
                             <br>
-                            <input type="checkbox" name="progress[]" value="l_judul" <?php echo $data['l_judul'] == 1 ? 'checked' : ''; ?>> Lembar judul
+                            <input type="checkbox" name="l_judul"   value= "<?php echo $row['l_judul'] == 1 ? '1' : '0'; ?>" id="l_judul" > Lembar judul
                             <br>
-                            <input type="checkbox" name="progress[]" value="l_pengesahan"<?php echo $data['l_pengesahan'] == 1 ? 'checked' : ''; ?>> Lembar pengesahan
+                            <input type="checkbox" name="l_pengesahan"  value= "<?php echo $row['l_pengesahan'] == 1 ? '1' : '0'; ?>" id="l_pengesahan" > Lembar pengesahan
                             <br>
-                            <input type="checkbox" name="progress[]" value="abstrak"<?php echo $data['abstrak'] == 1 ? 'checked' : ''; ?>> Abstrak
+                            <input type="checkbox" name="abstrak"  value= "<?php echo $row['abstrak'] == 1 ? '1' : '0'; ?>" id="abstrak" > Abstrak
                             <br>
-                            <input type="checkbox" name="progress[]" value="katpeng"<?php echo $data['katpeng'] == 1 ? 'checked' : ''; ?>> Kata pengantar
+                            <input type="checkbox" name="katpeng"  value= "<?php echo $row['katpeng'] == 1 ? '1' : '0'; ?>" id="katpeng" > Kata pengantar
                             <br>
-                            <input type="checkbox" name="progress[]" value="dafis"<?php echo $data['dafis'] == 1 ? 'checked' : ''; ?>> Daftar isi
+                            <input type="checkbox" name="dafis"  value= "<?php echo $row['dafis'] == 1 ? '1' : '0'; ?>" id="dafis" > Daftar isi
                             <br>
-                            <input type="checkbox" name="progress[]" value="daftab"<?php echo $data['daftab'] == 1 ? 'checked' : ''; ?>> Daftar table
+                            <input type="checkbox" name="daftab"  value= "<?php echo $row['daftab'] == 1 ? '1' : '0'; ?>" id="daftab" > Daftar table
                             <br>
-                            <input type="checkbox" name="progress[]" value="dafgam"<?php echo $data['dafgam'] == 1 ? 'checked' : ''; ?>> Daftar gambar
+                            <input type="checkbox" name="dafgam"  value= "<?php echo $row['dafgam'] == 1 ? '1' : '0'; ?>" id="dafgam" > Daftar gambar
                           </fieldset>
                         </td>
                         <!-- <td><input type="text" name="file_pendahuluan"></td> -->
-                        <td><textarea name="file_revisi_pendahuluan"><?php echo ($data['file_revisi_pendahuluan'] !== null) ? $data['file_revisi_pendahuluan'] : ''; ?></textarea></td>
+                        <td><textarea name="file_pendahuluan" id="file_pendahuluan" required><?php echo $row['file_revisi_pendahuluan']; ?></textarea></td>
 
                       </tr>
                       <tr>
@@ -165,7 +153,7 @@ $id_mahasiswa = $_GET['id_mahasiswa']; // Example, adjust based on your implemen
                         </td>
                         <!-- <td><input type="text" name="file_Bab1"></td> -->
                         <!-- <td><textarea name="file_bab1"><?php echo ($data['file_bab1'] !== null) ? $data['file_bab1'] : ''; ?></textarea></td> -->
-                        <td><textarea name="file_revisi_bab1"><?php echo isset($data['file_revisi_bab1']) ? $data['file_revisi_bab1'] : ''; ?></textarea></td>
+                        <td><textarea name="file_bab1"><?php echo isset($data['file_bab1']) ? $data['file_bab1'] : ''; ?></textarea></td>
                       </tr>
                       <tr>
                         <td>3.</td>
@@ -179,7 +167,7 @@ $id_mahasiswa = $_GET['id_mahasiswa']; // Example, adjust based on your implemen
                         </td>
                         <!-- <td><input type="text" name="file_Bab2"></td> -->
                         <!-- <td><textarea name="file_bab2"><?php echo ($data['file_bab2'] !== null) ? $data['file_bab2'] : ''; ?></textarea></td> -->
-                        <td><textarea name="file_revisi_bab2"><?php echo isset($data['file_revisi_bab2']) ? $data['file_revisi_bab2'] : ''; ?></textarea></td>
+                        <td><textarea name="file_bab2"><?php echo isset($data['file_bab2']) ? $data['file_bab2'] : ''; ?></textarea></td>
 
                       </tr>
                       <tr>
@@ -196,7 +184,7 @@ $id_mahasiswa = $_GET['id_mahasiswa']; // Example, adjust based on your implemen
                         </td>
                         <!-- <td><input type="text" name="file_Bab3"></td> -->
                         <!-- <td><textarea name="file_bab3"><?php echo ($data['file_bab3'] !== null) ? $data['file_bab3'] : ''; ?></textarea></td> -->
-                        <td><textarea name="file_revisi_bab3"><?php echo isset($data['file_revisi_bab3']) ? $data['file_revisi_bab3'] : ''; ?></textarea></td>
+                        <td><textarea name="file_bab3"><?php echo isset($data['file_bab3']) ? $data['file_bab3'] : ''; ?></textarea></td>
 
                       </tr>
                       <tr>
@@ -213,7 +201,7 @@ $id_mahasiswa = $_GET['id_mahasiswa']; // Example, adjust based on your implemen
                         </td>
                         <!-- <td><input type="text" name="file_bab4"></td> -->
                         <!-- <td><textarea name="file_bab4"><?php echo ($data['file_bab4'] !== null) ? $data['file_bab4'] : ''; ?></textarea></td> -->
-                        <td><textarea name="file_revisi_bab4"><?php echo isset($data['file_revisi_bab4']) ? $data['file_revisi_bab4'] : ''; ?></textarea></td>
+                        <td><textarea name="file_bab4"><?php echo isset($data['file_bab4']) ? $data['file_bab4'] : ''; ?></textarea></td>
 
                       </tr>
                       <tr>
@@ -228,7 +216,7 @@ $id_mahasiswa = $_GET['id_mahasiswa']; // Example, adjust based on your implemen
                         </td>
                         <!-- <td><input type="text" name="file_bab5"></td> -->
                         <!-- <td><textarea name="file_bab5"><?php echo ($data['file_bab5'] !== null) ? $data['file_bab5'] : ''; ?></textarea></td> -->
-                        <td><textarea name="file_revisi_bab5"><?php echo isset($data['file_revisi_bab5']) ? $data['file_revisi_bab5'] : ''; ?></textarea></td>
+                        <td><textarea name="file_bab5"><?php echo isset($data['file_bab5']) ? $data['file_bab5'] : ''; ?></textarea></td>
 
                       </tr>
                       <tr>
@@ -243,7 +231,7 @@ $id_mahasiswa = $_GET['id_mahasiswa']; // Example, adjust based on your implemen
                         </td>
                         <!-- <td><input type="text" name="file_akhir"></td> -->
                         <!-- <td><textarea name="file_akhir"><?php echo ($data['file_akhir'] !== null) ? $data['file_akhir'] : ''; ?></textarea></td> -->
-                        <td><textarea name="file_revisi_akhir"><?php echo isset($data['file_revisi_akhir']) ? $data['file_revisi_akhir'] : ''; ?></textarea></td>
+                        <td><textarea name="file_akhir"><?php echo isset($data['file_akhir']) ? $data['file_akhir'] : ''; ?></textarea></td>
 
                       </tr>
                                         
@@ -255,15 +243,11 @@ $id_mahasiswa = $_GET['id_mahasiswa']; // Example, adjust based on your implemen
                                         </tr>
 
 
-                                        <?php
-                    } else {
-                        echo "Data not found."; // Outputkan pesan jika data tidak ditemukan
-                    }
-                } else {
-                    echo "Error in query: " . mysqli_error($host); // Outputkan pesan kesalahan query
-                }
-                ?>
+                                        
                             </form>
+                            <?php
+            }
+            ?>
             </div>
         </div>
 	</div>
