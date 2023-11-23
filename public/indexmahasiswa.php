@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Check if the user is not logged in or is not a mahasiswa
+if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'mahasiswa') {
+    header("location: ../admin/login.php"); // Redirect to the login page if not logged in or not a mahasiswa
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -43,8 +53,10 @@
     <a class="w3-bar-item" href="#">
       <img src="..\public\assets\img\fav.ico" width="100" height="auto" alt="Logo">
     </a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">MANAJEMEN TA</a>
-    <a href="..\admin\login.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline"><i class="fa fa-user"></i> LOGIN </a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large"><?php echo $_SESSION['login_user']; ?></a>
+        <a href="../admin/logout.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline">
+            <i class="fa fa-sign-out"></i> Logout
+        </a>
   </div>
 </div>
 

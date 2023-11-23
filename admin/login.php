@@ -1,3 +1,78 @@
+<?php
+session_start();
+
+require_once "../config/config.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = mysqli_real_escape_string($host, $_POST['username']);
+    $password = mysqli_real_escape_string($host, $_POST['password']);
+
+    // Check admin credentials
+    $admin_query = "SELECT * FROM admin WHERE username = '$username' AND password = '$password'";
+    $admin_result = mysqli_query($host, $admin_query);
+    $admin_count = mysqli_num_rows($admin_result);
+
+    // Check dosen credentials
+    $dosen_query = "SELECT * FROM dosen WHERE username = '$username' AND password = '$password'";
+    $dosen_result = mysqli_query($host, $dosen_query);
+    $dosen_count = mysqli_num_rows($dosen_result);
+
+    // Check mahasiswa credentials
+    $mahasiswa_query = "SELECT * FROM mahasiswa WHERE username = '$username' AND password = '$password'";
+    $mahasiswa_result = mysqli_query($host, $mahasiswa_query);
+    $mahasiswa_count = mysqli_num_rows($mahasiswa_result);
+
+    if ($admin_count == 1) {
+        $_SESSION['login_user'] = $username;
+        $_SESSION['user_type'] = 'admin';
+        header("location: index.php"); // Redirect to the admin dashboard
+    } elseif ($dosen_count == 1) {
+        // Fetch the dosen information
+        $dosen_query = "SELECT id_dosen FROM dosen WHERE username = '$username'";
+        $dosen_result = mysqli_query($host, $dosen_query);
+
+        if ($dosen_result) {
+            $dosen_data = mysqli_fetch_assoc($dosen_result);
+            $id_dosen = $dosen_data['id_dosen'];
+
+            $_SESSION['login_user'] = $username;
+            $_SESSION['user_type'] = 'dosen';
+            header("location: ../public/indexdosen.php?id_dosen=$id_dosen");
+        } else {
+            // Handle the case where the query fails
+            echo "Error fetching dosen information: " . mysqli_error($host);
+        }
+    } elseif ($mahasiswa_count == 1) {
+        $_SESSION['login_user'] = $username;
+        $_SESSION['user_type'] = 'mahasiswa';
+        header("location: ../public/indexmahasiswa.php"); // Redirect to the mahasiswa dashboard
+
+        // Fetch the mahasiswa information
+        $mahasiswa_query = "SELECT id_mahasiswa FROM mahasiswa WHERE username = '$username'";
+        $mahasiswa_result = mysqli_query($host, $mahasiswa_query);
+
+        if ($mahasiswa_result) {
+            $mahasiswa_data = mysqli_fetch_assoc($mahasiswa_result);
+            $id_mahasiswa = $mahasiswa_data['id_mahasiswa'];
+
+            $_SESSION['login_user'] = $username;
+            $_SESSION['user_type'] = 'mahasiswa';
+            header("location: ../public/indexmahasiswa.php?id_mahasiswa=$id_mahasiswa");
+        } else {
+            // Handle the case where the query fails
+            echo "Error fetching mahasiswa information: " . mysqli_error($host);
+        }
+    } else {
+        $error = "Your Login Name or Password is invalid";
+    }
+}
+?>
+
+<!-- Rest of your HTML code -->
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 

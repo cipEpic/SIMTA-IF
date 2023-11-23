@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Check if the user is not logged in or is not a dosen
+if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'dosen') {
+    header("location: ../admin/login.php"); // Redirect to the login page if not logged in or not a dosen
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -36,16 +46,19 @@
 </head>
 <body>
 
+
 <!-- Navbar -->
 <div class="w3-top">
-  <div class="w3-bar w3-black w3-card">
+    <div class="w3-bar w3-black w3-card">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a class="w3-bar-item" href="#">
       <img src="..\public\assets\img\fav.ico" width="100" height="auto" alt="Logo">
     </a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">MANAJEMEN TA</a>
-    <a href="..\admin\login.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline"><i class="fa fa-user"></i> LOGIN </a>
-  </div>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large"><?php echo $_SESSION['login_user']; ?></a>
+        <a href="../admin/logout.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline">
+            <i class="fa fa-sign-out"></i> Logout
+        </a>
+    </div>
 </div>
 
 <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
