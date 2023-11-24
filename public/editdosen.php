@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Check if the user is not logged in or is not a dosen
+if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'dosen') {
+    header("location: ../admin/login.php"); // Redirect to the login page if not logged in or not a dosen
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -81,14 +91,12 @@
                 <h3 class="card-title">Progress Bimbingan nama mahasiswa</h3>
                 </div>
                 <?php
-// Define or retrieve $id_mahasiswa before this point
-$id_mahasiswa = $_GET['id_mahasiswa']; // Example, adjust based on your implementation
-?>             
+                  // Define or retrieve $id_progress before this point
+                  $id_progress = $_GET['id_progress']; // Example, adjust based on your implementation
+                  ?>             
                 <form id="dosenForm" action="proses_update_bimbingan.php" method="post">
-                <!-- Tambahkan input hidden untuk menyimpan id_mahasiswa -->
-                <input type="hidden" name="id_mahasiswa" value="<?php echo $id_mahasiswa; ?>">
                 <!-- Tambahkan input hidden untuk menyimpan id_progress -->
-                <input type="hidden" name="id_progress" value="<?php echo $data['id_progress']; ?>">
+                <input type="hidden" name="id_progress" value="<?php echo $id_progress; ?>">
 
 
             <table class="table table-striped" border="1">
@@ -97,11 +105,11 @@ $id_mahasiswa = $_GET['id_mahasiswa']; // Example, adjust based on your implemen
                 // Ambil data dari database
                 require_once "../config/config.php";
 
-                 // Pastikan id_mahasiswa sudah terdefinisi, atau berikan nilai default jika belum
-                  $id_mahasiswa = isset($_GET['id_mahasiswa']) ? $_GET['id_mahasiswa'] : 0;
+                 // Pastikan id_progress sudah terdefinisi, atau berikan nilai default jika belum
+                  $id_progress = isset($_GET['id_progress']) ? $_GET['id_progress'] : 0;
 
-                // Gantilah "nama_tabel" dan "id_mahasiswa" dengan nama tabel dan id yang sesuai di database Anda
-                $query = "SELECT * FROM progress_bimbingan WHERE id_mahasiswa = $id_mahasiswa";
+                // Gantilah "nama_tabel" dan "id_progress" dengan nama tabel dan id yang sesuai di database Anda
+                $query = "SELECT * FROM progress_bimbingan WHERE id_progress = $id_progress";
                 // Eksekusi query dan ambil hasilnya
                 $result = mysqli_query($host, $query);
 

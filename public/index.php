@@ -36,7 +36,10 @@ body {font-family: "Lato", sans-serif}
     </a>
     <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
     <a href="#band" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ABOUT</a>
-    <a href="..\admin\login.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline"><i class="fa fa-user"></i> LOGIN </a>
+    <a href="..\admin\login.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline" style="color: white;">
+    <i class="fa fa-user"></i> LOGIN
+    </a>
+
   </div>
 </div>
 

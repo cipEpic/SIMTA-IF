@@ -1,9 +1,6 @@
 <?php
 require_once "../config/config.php";
 
-
-
-
 // start crud proses progress
 {
     // start proses forms progress
@@ -81,7 +78,7 @@ if (isset($_POST['forms-validationtw'])) {
     switch ($userType) {
         case 'admin':
             // Insert data into the admin table
-            $query = "INSERT INTO admin (username, nama, password, email, no_telp) VALUES ('$name', '$name', '$password', '$email', '$no_telp')";
+            $query = "INSERT INTO admin (NIP, username, nama, password, email, no_telp) VALUES ('$nipNim', '$name', '$name', '$password', '$email', '$no_telp')";
             break;
         case 'dosen':
             // Insert data into the dosen table

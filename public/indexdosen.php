@@ -6,6 +6,32 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'dosen') {
     header("location: ../admin/login.php"); // Redirect to the login page if not logged in or not a dosen
     exit();
 }
+
+// Include the database configuration
+require_once "../config/config.php";
+
+// Assuming you have a function to retrieve id_progress based on id_dosen and id_mahasiswa
+function getIdProgress($id_dosen, $id_mahasiswa, $host) {
+  // Implement your logic to fetch id_progress from the database
+  $query = "SELECT id_progress FROM progress_bimbingan WHERE id_dosen = $id_dosen AND id_mahasiswa = $id_mahasiswa";
+  $result = $host->query($query);
+
+  if ($result->num_rows > 0) {
+      $row = $result->fetch_assoc();
+      return $row['id_progress'];
+  } else {
+      return null;
+  }
+}
+
+// Query untuk mengambil data mahasiswa yang diampu oleh dosen tertentu
+$id_dosen = $_GET['id_dosen']; // Ganti dengan ID dosen yang sesuai
+// Query untuk mengambil data mahasiswa yang direvisi oleh dosen tertentu
+$query = "SELECT m.id_mahasiswa, m.NIM, m.nama_mahasiswa
+FROM mahasiswa m
+JOIN progress_bimbingan p ON m.id_mahasiswa = p.id_mahasiswa
+WHERE p.id_dosen = $id_dosen";
+$result = $host->query($query);
 ?>
 
 <!DOCTYPE html>
@@ -111,30 +137,18 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'dosen') {
                                         <tbody>
 
                                         <?php
-                                        require_once "../config/config.php";
-
-                                        // Query untuk mengambil data mahasiswa yang diampu oleh dosen tertentu
-                                        // $id_dosen = 1; 
-                                        $id_dosen = $_GET['id_dosen']; // Ganti dengan ID dosen yang sesuai
-                                        // Query untuk mengambil data mahasiswa yang direvisi oleh dosen tertentu
-                                        $query = "SELECT m.id_mahasiswa, m.NIM, m.nama_mahasiswa
-                                        FROM mahasiswa m
-                                        JOIN progress_bimbingan p ON m.id_mahasiswa = p.id_mahasiswa
-                                        WHERE p.id_dosen = $id_dosen";
-                                        $result = $host->query($query);
-
-                                        // Tutup koneksi database
-                                        $host->close();
-                                        ?>
-                                        <?php
                                         if ($result->num_rows > 0) {
                                             $no = 1;
                                             while ($row = $result->fetch_assoc()) {
+                                                // Assuming you have a function to retrieve id_progress based on id_dosen and id_mahasiswa
+                                                $id_progress = getIdProgress($id_dosen, $row['id_mahasiswa'], $host);
+
                                                 echo "<tr>";
                                                 echo "<td>" . $no . "</td>";
                                                 echo "<td>" . $row['NIM'] . "</td>";
                                                 echo "<td>" . $row['nama_mahasiswa'] . "</td>";
-                                                echo "<td><a class='btn btn-primary' href='editdosen.php?id_mahasiswa=" . $row['id_mahasiswa'] . "'>Edit</a></td>";
+                                                // Modify the link to include id_progress instead of id_mahasiswa
+                                                echo "<td><a class='btn btn-primary' href='editdosen.php?id_progress=" . $id_progress . "'>Edit</a></td>";
                                                 echo "</tr>";
                                                 $no++;
                                             }
@@ -243,3 +257,8 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'dosen') {
   <!-- Footer -->
 </body>
 </html>
+
+<?php
+// Close the database connection
+$host->close();
+?>

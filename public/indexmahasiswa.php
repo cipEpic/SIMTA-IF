@@ -3,7 +3,7 @@ session_start();
 
 // Check if the user is not logged in or is not a mahasiswa
 if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'mahasiswa') {
-    header("location: ../admin/login.php"); // Redirect to the login page if not logged in or not a mahasiswa
+    header("location: ../admin/login.php"); // Redirect to the login page if not logged in or not a dosen
     exit();
 }
 ?>
@@ -46,30 +46,29 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'mahasiswa') {
 </head>
 <body>
 
+
 <!-- Navbar -->
 <div class="w3-top">
-  <div class="w3-bar w3-black w3-card">
+    <div class="w3-bar w3-black w3-card">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a class="w3-bar-item" href="#">
       <img src="..\public\assets\img\fav.ico" width="100" height="auto" alt="Logo">
     </a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large"><?php echo $_SESSION['login_user']; ?></a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large"><?php echo $_SESSION['login_user']; ?></a>
         <a href="../admin/logout.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline">
             <i class="fa fa-sign-out"></i> Logout
         </a>
-  </div>
+    </div>
 </div>
 
 <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
 <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
 </div>
 
-
-    <!-- Menampilkan data order dan customer dalam tabel menggunakan bootstrap -->
-    <!-- <div class="container"> <br /> <br /> -->
-    <div class="content-wrapper"> 
-    <!-- Content Header (Page header) -->
-     <section class="content-header">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -78,196 +77,119 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'mahasiswa') {
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">EditProducts</li>
+                                <li class="breadcrumb-item active">DataMahasiswa</li>
                             </ol>
                         </div>
                     </div>
+                </div><!-- /.container-fluid -->
+            </section>
+    
+
+
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Data Mahasiswa</h3>
+                                </div>
+
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>NIP Dosen</th>
+                                                <th>Nama Dosen</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        <?php
+                                        require_once "../config/config.php";
+
+                                        // Get the id_mahasiswa from the URL
+                                        $id_mahasiswa = $_GET['id_mahasiswa'];
+
+                                        // Query to get the progress of a specific Mahasiswa
+                                        $query = "SELECT d.NIP, d.nama_dosen, p.id_progress
+                                                  FROM dosen d
+                                                  JOIN progress_bimbingan p ON d.id_dosen = p.id_dosen
+                                                  WHERE p.id_mahasiswa = $id_mahasiswa";
+                                        $result = $host->query($query);
+
+                                        // Close the database connection
+                                        $host->close();
+
+                                        if ($result->num_rows > 0) {
+                                            $no = 1;
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo "<tr>";
+                                                echo "<td>" . $no . "</td>";
+                                                echo "<td>" . $row['NIP'] . "</td>";
+                                                echo "<td>" . $row['nama_dosen'] . "</td>";
+                                                echo "<td><a class='btn btn-primary' href='lihatmahasiswa.php?id_progress=" . $row['id_progress'] . "'>View</a></td>";
+                                                echo "</tr>";
+                                                $no++;
+                                            }
+                                        } else {
+                                            echo "<tr><td colspan='4'>Tidak ada data progress mahasiswa</td></tr>";
+                                        }
+                                        ?>
+
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>NIP Dosen</th>
+                                                <th>Nama Dosen</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
                 </div>
-				<!-- /.container-fluid -->
-    </section>
-
-    <div class="row">
-        <div class="col-12">
-			<div class="card p-lg-5">
-                <div class="card-header">
-                <?php
-                require_once "../config/config.php";
-
-                // Assuming you have the $id_progress variable set somewhere
-                $id_mahasiswa = $_GET['id_mahasiswa']; // Replace this with the appropriate way you set the id_progress variable
-
-                // Assuming you have a query to fetch data
-                $query = "SELECT progress_bimbingan.*, mahasiswa.nama_mahasiswa FROM progress_bimbingan
-                INNER JOIN mahasiswa ON progress_bimbingan.id_mahasiswa = mahasiswa.id_mahasiswa
-                WHERE progress_bimbingan.id_mahasiswa = $id_mahasiswa";
-
-                $result = mysqli_query($host, $query);
-
-                if (!$result) {
-                die("Query failed: " . mysqli_error($host));
-                }
-
-                $row = mysqli_fetch_assoc($result);
-                $nama_mahasiswa = $row['nama_mahasiswa'] ?? ""; // Default value if nama_mahasiswa is NULL
-
-                ?>
-                    <h2>Selamat datang, <?php echo $nama_mahasiswa; ?></h2>
-                    <h3>Progress Bimbingan Anda</h3>
-                </div>
-                                
-            <form id="customerForm" action="prosesedit-jquery.php?id_product=<?php echo $id_product; ?>" method="post">
-                <table class="table table-striped" border="1">
-                <tr>
-                  <th>No.</th>
-                  <th>Progres</th>
-                  <th>Status Persetujuan</th>
-                  <th>Unduh Revisi</th>
-                </tr>
-
-                <?php
-                require_once "../config/config.php";
-
-                // Assuming you have the $id_progress variable set somewhere
-                $id_mahasiswa = $_GET['id_mahasiswa']; // Replace this with the appropriate way you set the id_progress variable
-
-                // Assuming you have a query to fetch data
-                $query = "SELECT * FROM progress_bimbingan WHERE id_mahasiswa = $id_mahasiswa";
-
-                $result = mysqli_query($host, $query);
-
-                if (!$result) {
-                    die("Query failed: " . mysqli_error($host));
-                }
-
-                $row = mysqli_fetch_assoc($result);
-
-                ?>
-      <tr>
-    <td>1.</td>
-    <td>Pendahuluan</td>
-    <td>
-        <fieldset>
-            <input type="checkbox" disabled <?= $row['sampul'] ? 'checked' : ''; ?>> Sampul depan
-            <br>
-            <input type="checkbox" disabled <?= $row['l_judul'] ? 'checked' : ''; ?>> Lembar judul
-            <br>
-            <input type="checkbox" disabled <?= $row['l_pengesahan'] ? 'checked' : ''; ?>> Lembar pengesahan
-            <br>
-            <input type="checkbox" disabled <?= $row['abstrak'] ? 'checked' : ''; ?>> Abstrak
-            <br>
-            <input type="checkbox" disabled <?= $row['katpeng'] ? 'checked' : ''; ?>> Kata pengantar
-            <br>
-            <input type="checkbox" disabled <?= $row['dafis'] ? 'checked' : ''; ?>> Daftar isi
-            <br>
-            <input type="checkbox" disabled <?= $row['daftab'] ? 'checked' : ''; ?>> Daftar table
-            <br>
-            <input type="checkbox" disabled <?= $row['dafgam'] ? 'checked' : ''; ?>> Daftar gambar
-            <!-- Repeat this for other checkboxes -->
-        </fieldset>
-    </td>
-    <td><?php echo ($row['file_revisi_pendahuluan'] !== null) ? nl2br($row['file_revisi_pendahuluan']) : '-'; ?></td>
-</tr>
-<!-- Repeat the above structure for other sections -->
-<tr>
-        <td>2.</td>
-        <td>BAB I</td>
-        <td>
-          <fieldset>
-          <input type="checkbox" disabled <?= $row['latbel'] ? 'checked' : ''; ?>> a. Latar belakang
-            <br>
-            <input type="checkbox" disabled <?= $row['rumusan'] ? 'checked' : ''; ?>> b. Rumusan masalah
-            <br>
-            <input type="checkbox" disabled <?= $row['batasan'] ? 'checked' : ''; ?>> c. Batasan masalah
-            <br>
-            <input type="checkbox" disabled <?= $row['tujuan'] ? 'checked' : ''; ?>> d. Tujuan
-            <br>
-            <input type="checkbox" disabled <?= $row['manfaat'] ? 'checked' : ''; ?>> e. Manfaat
-            <br>
-            <input type="checkbox" disabled <?= $row['sistematika_penulisan'] ? 'checked' : ''; ?>> f. Sistematika Penulisan
-          </fieldset>
-        </td>
-        <td><?php echo ($row['file_revisi_bab1'] !== null) ? nl2br($row['file_revisi_bab1']) : '-'; ?></td>
-      </tr>
-      <tr>
-        <td>3.</td>
-        <td>BAB II</td>
-        <td>
-          <fieldset>
-          <input type="checkbox" disabled <?= $row['teoritis'] ? 'checked' : ''; ?>> a.	Tinjauan teori
-            <br>
-            <input type="checkbox" disabled <?= $row['empiris'] ? 'checked' : ''; ?>> b.	Tinjauan Empiris
-          </fieldset>
-        </td>
-        <td><?php echo ($row['file_revisi_bab2'] !== null) ? nl2br($row['file_revisi_bab2']) : '-'; ?></td>
-      </tr>
-      <tr>
-        <td>4.</td>
-        <td>BAB III</td>
-        <td>
-          <fieldset>
-          <input type="checkbox" disabled <?= $row['metopen'] ? 'checked' : ''; ?>> a.	Data dan Metode Pengumpulan Data
-            <br>
-            <input type="checkbox" disabled <?= $row['desain_sistem'] ? 'checked' : ''; ?>> b.	Desain sistem/Metode
-            <br>
-            <input type="checkbox" disabled <?= $row['desain_evaluasi'] ? 'checked' : ''; ?>> c.	Desain Evaluasi Sistem/Metode
-           
-          </fieldset>
-        </td>
-        <td><?php echo ($row['file_revisi_bab3'] !== null) ? nl2br($row['file_revisi_bab3']) : '-'; ?></td>
-      </tr>
-      <tr>
-        <td>5.</td>
-        <td>BAB IV</td>
-        <td>
-          <fieldset>
-          <input type="checkbox" disabled <?= $row['proses_kumpul_data'] ? 'checked' : ''; ?>> a.	Proses Pengumpulan Data
-            <br>
-            <input type="checkbox" disabled <?= $row['implementasi_sistem'] ? 'checked' : ''; ?>> b.	Implementasi Sistem/Metode
-            <br>
-            <input type="checkbox" disabled <?= $row['implementasi_evaluasi'] ? 'checked' : ''; ?>> c.	Implementasi Evaluasi Sistem/Metode
-          </fieldset>
-        </td>
-        <td><?php echo ($row['file_revisi_bab4'] !== null) ? nl2br($row['file_revisi_bab4']) : '-'; ?></td>
-      </tr>
-      <tr>
-        <td>6.</td>
-        <td>BAB V</td>
-        <td>
-          <fieldset>
-          <input type="checkbox" disabled <?= $row['kesimpulan'] ? 'checked' : ''; ?>> a.	Kesimpulan
-            <br>
-            <input type="checkbox" disabled <?= $row['saran'] ? 'checked' : ''; ?>> b.	Saran
-          </fieldset>
-        </td>
-        <<td><?php echo ($row['file_revisi_bab5'] !== null) ? nl2br($row['file_revisi_bab5']) : '-'; ?></td>
-      </tr>
-      <tr>
-        <td>7.</td>
-        <td>Akhir</td>
-        <td>
-          <fieldset>
-          <input type="checkbox" disabled <?= $row['dafpus'] ? 'checked' : ''; ?>> a. Daftar Pustaka
-            <br>
-            <input type="checkbox" disabled <?= $row['lampiran'] ? 'checked' : ''; ?>> b. Lampiran
-          </fieldset>
-        </td>
-        <td><?php echo ($row['file_revisi_akhir'] !== null) ? nl2br($row['file_revisi_akhir']) : '-'; ?></td>
-      </tr>
-<?php
-// Free the result set
-mysqli_free_result($result);
-
-// Close the connection
-mysqli_close($host);
-?>
-                        
-                    </tbody>
-                </table>
-                
-            </form>
-            </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
         </div>
-	</div>
+
+
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <script>
+    $(function () {
+        $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+    </script>
+
 
   <!-- Footer -->
   <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">
@@ -319,7 +241,5 @@ mysqli_close($host);
     <!-- Copyright -->
   </footer>
   <!-- Footer -->
-
 </body>
-
 </html>
