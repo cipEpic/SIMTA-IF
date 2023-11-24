@@ -6,6 +6,8 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'dosen') {
     header("location: ../admin/login.php"); // Redirect to the login page if not logged in or not a dosen
     exit();
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -53,8 +55,46 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'dosen') {
     <a class="w3-bar-item" href="#">
       <img src="..\public\assets\img\fav.ico" width="100" height="auto" alt="Logo">
     </a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">MANAJEMEN TA</a>
-    <a href="..\admin\login.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline"><i class="fa fa-user"></i> LOGIN </a>
+    <?php
+// Verify that the session variable is set
+if (isset($_SESSION['login_user'])) {
+    require_once "../config/config.php"; // Include your database connection
+
+    // Escape user input to prevent SQL injection
+    $login_user = mysqli_real_escape_string($host, $_SESSION['login_user']);
+
+    // Assuming 'dosen' is the table and 'username' is the column
+    $query = "SELECT id_dosen FROM dosen WHERE username = '$login_user'";
+    $result = mysqli_query($host, $query);
+
+    if ($result) {
+        $user = mysqli_fetch_assoc($result);
+
+        if (!empty($user['id_dosen'])) {
+            $id_dosen = $user['id_dosen'];
+        } else {
+            // Handle the case where 'id_dosen' is not available in the database
+            echo "The 'id_dosen' is not set in the database.";
+        }
+    } else {
+        // Handle the case where the query fails
+        echo "Error in query: " . mysqli_error($host);
+    }
+?>
+
+<a href="indexdosen.php?id_dosen=<?php echo $id_dosen; ?>" class="w3-bar-item w3-button w3-padding-large">MANAJEMEN TA</a>
+
+<?php
+} else {
+    // Handle the case where the session variable is not set
+    echo "Session variable 'login_user' is not set.";
+}
+?>
+
+
+        <a href="../admin/logout.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline">
+                    <i class="fa fa-sign-out"></i> Logout
+        </a>
   </div>
 </div>
 
@@ -88,7 +128,46 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'dosen') {
         <div class="col-12">
 			<div class="card p-lg-5">
                 <div class="card-header">
-                <h3 class="card-title">Progress Bimbingan nama mahasiswa</h3>
+                <?php
+require_once "../config/config.php";
+
+// Retrieve id_progress from the URL
+$id_progress = isset($_GET['id_progress']) ? $_GET['id_progress'] : null;
+
+// Validate if $id_progress is a valid integer (optional)
+if (!ctype_digit($id_progress)) {
+    // Handle invalid id_progress (e.g., redirect to an error page)
+    echo "Invalid id_progress";
+    exit();
+}
+
+// Convert $id_progress to an integer
+$id_progress = intval($id_progress);
+
+// Assuming you have a query to fetch data
+
+// $query = "SELECT progress_bimbingan.*, mahasiswa.nama_mahasiswa FROM progress_bimbingan
+//     INNER JOIN mahasiswa ON progress_bimbingan.id_mahasiswa = mahasiswa.id_mahasiswa
+//     WHERE progress_bimbingan.id_progress = $id_progress";
+
+$query = "SELECT progress_bimbingan.*, mahasiswa.nama_mahasiswa, dosen.nama_dosen
+    FROM progress_bimbingan
+    INNER JOIN mahasiswa ON progress_bimbingan.id_mahasiswa = mahasiswa.id_mahasiswa
+    INNER JOIN dosen ON progress_bimbingan.id_dosen = dosen.id_dosen
+    WHERE progress_bimbingan.id_progress = $id_progress";
+
+
+$result = mysqli_query($host, $query);
+
+if (!$result) {
+    die("Query failed: " . mysqli_error($host));
+}
+
+$row = mysqli_fetch_assoc($result);
+$nama_mahasiswa = $row['nama_mahasiswa'] ?? "";
+$nama_dosen = $row['nama_dosen'] ?? "";
+?>
+                <h3 class="card-title">Progress Bimbingan <?php echo $nama_mahasiswa; ?></h3>
                 </div>
                 <?php
                   // Define or retrieve $id_progress before this point

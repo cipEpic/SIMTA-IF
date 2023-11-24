@@ -53,7 +53,7 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'mahasiswa') {
     <a class="w3-bar-item" href="#">
       <img src="..\public\assets\img\fav.ico" width="100" height="auto" alt="Logo">
     </a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large"><?php echo $_SESSION['login_user']; ?></a>
+    <a href="" class="w3-bar-item w3-button w3-padding-large"><?php echo $_SESSION['login_user']; ?></a>
         <a href="../admin/logout.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline">
             <i class="fa fa-sign-out"></i> Logout
         </a>
@@ -107,9 +107,17 @@ if (!ctype_digit($id_progress)) {
 $id_progress = intval($id_progress);
 
 // Assuming you have a query to fetch data
-$query = "SELECT progress_bimbingan.*, mahasiswa.nama_mahasiswa FROM progress_bimbingan
+
+// $query = "SELECT progress_bimbingan.*, mahasiswa.nama_mahasiswa FROM progress_bimbingan
+//     INNER JOIN mahasiswa ON progress_bimbingan.id_mahasiswa = mahasiswa.id_mahasiswa
+//     WHERE progress_bimbingan.id_progress = $id_progress";
+
+$query = "SELECT progress_bimbingan.*, mahasiswa.nama_mahasiswa, dosen.nama_dosen
+    FROM progress_bimbingan
     INNER JOIN mahasiswa ON progress_bimbingan.id_mahasiswa = mahasiswa.id_mahasiswa
+    INNER JOIN dosen ON progress_bimbingan.id_dosen = dosen.id_dosen
     WHERE progress_bimbingan.id_progress = $id_progress";
+
 
 $result = mysqli_query($host, $query);
 
@@ -119,9 +127,10 @@ if (!$result) {
 
 $row = mysqli_fetch_assoc($result);
 $nama_mahasiswa = $row['nama_mahasiswa'] ?? "";
+$nama_dosen = $row['nama_dosen'] ?? "";
 ?>
                     <h2>Selamat datang, <?php echo $nama_mahasiswa; ?></h2>
-                    <h3>Progress Bimbingan Anda</h3>
+                    <h3>Progress Bimbingan Anda dengan, <?php echo $nama_dosen; ?></h3>
                 </div>
                                 
             <form id="MahasiswaForm" action="" method="post">
@@ -268,7 +277,7 @@ mysqli_close($host);
             <input type="checkbox" disabled <?= $row['saran'] ? 'checked' : ''; ?>> b.	Saran
           </fieldset>
         </td>
-        <<td><?php echo ($row['file_revisi_bab5'] !== null) ? nl2br($row['file_revisi_bab5']) : '-'; ?></td>
+        <td><?php echo ($row['file_revisi_bab5'] !== null) ? nl2br($row['file_revisi_bab5']) : '-'; ?></td>
       </tr>
       <tr>
         <td>7.</td>
