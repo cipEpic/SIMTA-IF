@@ -214,6 +214,18 @@ require_once "../config/config.php";
                     </div>
                   </div>
                 </div>
+                <div class="row position-relative mb-3">
+                <div class="input-group has-validation">
+                  <span class="input-group-text" id="username">Username &emsp;</span>
+                  <input type="text" class="form-control" name="username" id="username" aria-describedby="username" required>
+                  <div class="valid-tooltip">
+                    Looks good!
+                  </div>
+                  <div class="invalid-tooltip">
+                    Please choose a unique and valid Name.
+                  </div>
+                </div>
+              </div>
               <div class="row position-relative mb-3">
                 <div class="input-group has-validation">
                   <span class="input-group-text" id="name">Name &emsp;</span>
@@ -273,7 +285,7 @@ require_once "../config/config.php";
                 </div>
               </div>           
               <div class="row mt-4">
-                <button class="btn btn-success" type="submit" name="forms-validationtw"><i class="bi bi-file-earmark-check"></i> Submit Data</button>
+                <button class="btn btn-success" type="submit" name="forms-user"><i class="bi bi-file-earmark-check"></i> Submit Data</button>
               </div>
 
             </form>

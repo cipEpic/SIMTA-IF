@@ -65,9 +65,10 @@ require_once "../config/config.php";
 {
 
 // start proses forms user
-if (isset($_POST['forms-validationtw'])) {
+if (isset($_POST['forms-user'])) {
     // Get form data
     $userType = $_POST['userType'];
+    $username = $_POST['username'];
     $name = $_POST['name'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $email = $_POST['email'];
@@ -147,26 +148,26 @@ if (isset($_GET["id"])) {
 
 
 
-//start crud public form
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id_mahasiswa = $_POST["id_mahasiswa"];
-    $id_progress = $_POST["id_progress"];
+// //start crud public form
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     $id_mahasiswa = $_POST["id_mahasiswa"];
+//     $id_progress = $_POST["id_progress"];
 
-    // Loop through each checkbox and update the corresponding column in the database
-    foreach ($_POST["progress"] as $progress) {
-        $updateColumn = mysqli_real_escape_string($host, $progress);
+//     // Loop through each checkbox and update the corresponding column in the database
+//     foreach ($_POST["progress"] as $progress) {
+//         $updateColumn = mysqli_real_escape_string($host, $progress);
 
-        // Ubah nilai 0 menjadi 1, dan nilai 1 menjadi 0
-        $query = "UPDATE progress_bimbingan SET $updateColumn = 1 - $updateColumn WHERE id_mahasiswa = $id_mahasiswa AND id_progress = $id_progress";
-        mysqli_query($host, $query);
-    }
+//         // Ubah nilai 0 menjadi 1, dan nilai 1 menjadi 0
+//         $query = "UPDATE progress_bimbingan SET $updateColumn = 1 - $updateColumn WHERE id_mahasiswa = $id_mahasiswa AND id_progress = $id_progress";
+//         mysqli_query($host, $query);
+//     }
 
-    // Handle file uploads if needed
+//     // Handle file uploads if needed
 
-    // Redirect back to the edit page or another page
-    header("Location: editdosen.php?id_mahasiswa=$id_mahasiswa");
-    exit();
-}
+//     // Redirect back to the edit page or another page
+//     header("Location: editdosen.php?id_mahasiswa=$id_mahasiswa");
+//     exit();
+// }
 
 
 // Don't forget to close the connection
