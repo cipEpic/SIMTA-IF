@@ -1,5 +1,5 @@
 <?php
-$telegram_id ='-4147243304'; //ini akan masukkan semua data 
+$telegram_id ='1337591560'; //ini akan masukkan semua data 
 $message_text = "Ini adalah pesan yang akan dikirim ke Telegram.";
 $secret_token = '6994480912:AAGYjTeMCSXuF2oaOcqfTXN2odp9RBaKSZE';
 sendMessage($telegram_id, $message_text, $secret_token);

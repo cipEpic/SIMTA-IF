@@ -55,6 +55,7 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'mahasiswa') {
       <img src="..\public\assets\img\fav.ico" width="100" height="auto" alt="Logo">
     </a>
         <a href="#" class="w3-bar-item w3-button w3-padding-large"><?php echo $_SESSION['login_user']; ?></a>
+        <a href="https://t.me/getmyid_bot?start=start" class="w3-bar-item w3-button w3-padding-large">get id</a>
         <a href="../admin/logout.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline">
             <i class="fa fa-sign-out"></i> Logout
         </a>
@@ -123,9 +124,6 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'mahasiswa') {
                                                   WHERE p.id_mahasiswa = $id_mahasiswa";
                                         $result = $host->query($query);
 
-                                        // Close the database connection
-                                        $host->close();
-
                                         if ($result->num_rows > 0) {
                                             $no = 1;
                                             while ($row = $result->fetch_assoc()) {
@@ -166,6 +164,82 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'mahasiswa') {
             </section>
             <!-- /.content -->
         </div>
+
+        <!-- Bagian Bawah Tabel -->
+<!-- <div class="card-footer">
+    <h5 class="card-title">Kirim Telegram ID Anda</h5>
+    <form action="process_telegram_id.php" method="post">
+        <div class="input-group mb-3">
+            <input type="text" name="telegram_id" class="form-control" placeholder="Masukkan Telegram ID Anda" required>
+            <input type="hidden" name="id_dosen" value="<?php echo $id_dosen; ?>">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Kirim</button>
+            </div>
+        </div>
+    </form>
+</div> -->
+<!-- Bagian Bawah Tabel -->
+<br>
+            <!-- Main content 2-->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Kirim Telegram ID</h3>
+                                </div>
+
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                    
+    <?php
+    // Query untuk mendapatkan tele_id dari database
+    $query_telegram_id = "SELECT telegram_id FROM mahasiswa WHERE id_mahasiswa = $id_mahasiswa";
+    $result_telegram_id = $host->query($query_telegram_id);
+    $row_telegram_id = $result_telegram_id->fetch_assoc();
+    $telegram_id = $row_telegram_id['telegram_id'];
+
+    // Jika tele_id sudah diisi, berikan pesan
+    if (!empty($telegram_id)) {
+        echo "<div class='alert alert-info' role='alert'>Tele ID sudah dikirim</div>";
+    } else {
+        // Jika tele_id belum diisi, tampilkan formulir untuk mengirimkan Telegram ID
+        // echo "<h5 class='card-title'>Kirim Telegram ID Anda</h5>";
+        echo "<h6 class='card-title'>Untuk mendapatkan Telegram id akses menu get id atau klik <a href='https://t.me/getmyid_bot?start=start' style='color: blue'>disini</a>.</h6>";
+        echo "<form action='process_telegram_id_m.php' method='post'>";
+        echo "<div class='input-group mb-3'>";
+        echo "<input type='text' name='telegram_id' class='form-control' placeholder='Masukkan Telegram ID Anda' required>";
+        echo "<input type='hidden' name='id_mahasiswa' value='$id_mahasiswa'>";
+        echo "<div class='input-group-append'>";
+        echo "<button class='btn btn-primary' type='submit'>Kirim</button>";
+        echo "</div>";
+        echo "</div>";
+        echo "</form>";
+    }
+
+    // Close the database connection
+    $host->close();
+    ?>
+
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+
+
+
 
 
     <!-- jQuery -->
