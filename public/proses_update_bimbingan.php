@@ -41,13 +41,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file_revisi_bab4_content = isset($_POST['file_revisi_bab4']) ? $_POST['file_revisi_bab4'] : '';
     $file_revisi_bab5_content = isset($_POST['file_revisi_bab5']) ? $_POST['file_revisi_bab5'] : '';
     $file_revisi_akhir_content = isset($_POST['file_revisi_akhir']) ? $_POST['file_revisi_akhir'] : '';
+    
+    // Retrieve next deadline from the form
+    $next_deadline = isset($_POST['next_deadline']) ? $_POST['next_deadline'] : '';
 
-    // Update the corresponding columns in the database with the text content
-    $updateFileQuery = "UPDATE progress_bimbingan SET file_revisi_pendahuluan = ?, file_revisi_bab1 = ?, file_revisi_bab2 = ?, file_revisi_bab3 = ?, file_revisi_bab4 = ?, file_revisi_bab5 = ?, file_revisi_akhir = ? WHERE id_progress = ?";
+    // Update the corresponding columns in the database with the text content and next deadline
+    $updateFileQuery = "UPDATE progress_bimbingan SET file_revisi_pendahuluan = ?, file_revisi_bab1 = ?, file_revisi_bab2 = ?, file_revisi_bab3 = ?, file_revisi_bab4 = ?, file_revisi_bab5 = ?, file_revisi_akhir = ?, next_deadline = ? WHERE id_progress = ?";
     $stmt = mysqli_prepare($host, $updateFileQuery);
 
     // Use "s" for each parameter in the bind_param call
-    mysqli_stmt_bind_param($stmt, "sssssssi", $file_revisi_pendahuluan_content, $file_revisi_bab1_content, $file_revisi_bab2_content, $file_revisi_bab3_content, $file_revisi_bab4_content, $file_revisi_bab5_content, $file_revisi_akhir_content, $id_progress);
+    mysqli_stmt_bind_param($stmt, "ssssssssi", $file_revisi_pendahuluan_content, $file_revisi_bab1_content, $file_revisi_bab2_content, $file_revisi_bab3_content, $file_revisi_bab4_content, $file_revisi_bab5_content, $file_revisi_akhir_content, $next_deadline, $id_progress);
 
     // Execute the file update query
     $fileResult = mysqli_stmt_execute($stmt);

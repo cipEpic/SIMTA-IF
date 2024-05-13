@@ -106,6 +106,7 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'mahasiswa') {
                                                 <th>No</th>
                                                 <th>NIP Dosen</th>
                                                 <th>Nama Dosen</th>
+                                                <th>Next DL</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -118,7 +119,7 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'mahasiswa') {
                                         $id_mahasiswa = $_GET['id_mahasiswa'];
 
                                         // Query to get the progress of a specific Mahasiswa
-                                        $query = "SELECT d.NIP, d.nama_dosen, p.id_progress
+                                        $query = "SELECT d.NIP, d.nama_dosen, p.id_progress, p.next_deadline
                                                   FROM dosen d
                                                   JOIN progress_bimbingan p ON d.id_dosen = p.id_dosen
                                                   WHERE p.id_mahasiswa = $id_mahasiswa";
@@ -131,6 +132,7 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'mahasiswa') {
                                                 echo "<td>" . $no . "</td>";
                                                 echo "<td>" . $row['NIP'] . "</td>";
                                                 echo "<td>" . $row['nama_dosen'] . "</td>";
+                                                echo "<td>" . $row['next_deadline'] . "</td>"; // Menampilkan next_deadline di dalam tabel
                                                 echo "<td><a class='btn btn-primary' href='lihatmahasiswa.php?id_progress=" . $row['id_progress'] . "'>View</a></td>";
                                                 echo "</tr>";
                                                 $no++;
@@ -146,6 +148,7 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'mahasiswa') {
                                                 <th>No</th>
                                                 <th>NIP Dosen</th>
                                                 <th>Nama Dosen</th>
+                                                <th>Next DL</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>

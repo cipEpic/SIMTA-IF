@@ -176,7 +176,7 @@ $nama_dosen = $row['nama_dosen'] ?? "";
                 <form id="dosenForm" action="proses_update_bimbingan.php" method="post">
                 <!-- Tambahkan input hidden untuk menyimpan id_progress -->
                 <input type="hidden" name="id_progress" value="<?php echo $id_progress; ?>">
-
+                
 
             <table class="table table-striped" border="1">
 
@@ -338,6 +338,9 @@ $nama_dosen = $row['nama_dosen'] ?? "";
                                 </table>
                                 <tr>
                                 <td></td>
+                                <label for="next_deadline">Next Deadline:</label>
+                                <input type="date" id="next_deadline" name="next_deadline">
+                                <br>
                                 <td><input type="submit" name="updateb" value="edit" class="btn btn-danger"></td>
                                         </tr>
 

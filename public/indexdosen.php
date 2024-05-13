@@ -27,7 +27,7 @@ function getIdProgress($id_dosen, $id_mahasiswa, $host) {
 // Query untuk mengambil data mahasiswa yang diampu oleh dosen tertentu
 $id_dosen = $_GET['id_dosen']; // Ganti dengan ID dosen yang sesuai
 // Query untuk mengambil data mahasiswa yang direvisi oleh dosen tertentu
-$query = "SELECT m.id_mahasiswa, m.NIM, m.nama_mahasiswa
+$query = "SELECT m.id_mahasiswa, m.NIM, m.nama_mahasiswa, p.next_deadline
 FROM mahasiswa m
 JOIN progress_bimbingan p ON m.id_mahasiswa = p.id_mahasiswa
 WHERE p.id_dosen = $id_dosen";
@@ -132,6 +132,7 @@ $result = $host->query($query);
                                                 <th>No</th>
                                                 <th>NIM</th>
                                                 <th>Nama Mahasiswa</th>
+                                                <th>Next DL</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -148,6 +149,7 @@ $result = $host->query($query);
                                                 echo "<td>" . $no . "</td>";
                                                 echo "<td>" . $row['NIM'] . "</td>";
                                                 echo "<td>" . $row['nama_mahasiswa'] . "</td>";
+                                                echo "<td>" . $row['next_deadline'] . "</td>"; // Menampilkan next_deadline di dalam tabel
                                                 // Modify the link to include id_progress instead of id_mahasiswa
                                                 echo "<td><a class='btn btn-primary' href='editdosen.php?id_progress=" . $id_progress . "'>Edit</a></td>";
                                                 echo "</tr>";
@@ -164,6 +166,7 @@ $result = $host->query($query);
                                             <th>No</th>
                                             <th>NIM</th>
                                                 <th>Nama Mahasiswa</th>
+                                                <th>Next DL</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
