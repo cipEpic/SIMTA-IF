@@ -53,8 +53,42 @@ if (!isset($_SESSION['login_user']) || $_SESSION['user_type'] !== 'mahasiswa') {
     <a class="w3-bar-item" href="#">
       <img src="..\public\assets\img\fav.ico" width="100" height="auto" alt="Logo">
     </a>
-    <a href="" class="w3-bar-item w3-button w3-padding-large"><?php echo $_SESSION['login_user']; ?></a>
-        <a href="../admin/logout.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline">
+    <?php
+// Verify that the session variable is set
+if (isset($_SESSION['login_user'])) {
+    require_once "../config/config.php"; // Include your database connection
+
+    // Escape user input to prevent SQL injection
+    $login_user = mysqli_real_escape_string($host, $_SESSION['login_user']);
+
+    // Assuming 'dosen' is the table and 'username' is the column
+    $query = "SELECT id_mahasiswa FROM mahasiswa WHERE username = '$login_user'";
+    $result = mysqli_query($host, $query);
+
+    if ($result) {
+        $user = mysqli_fetch_assoc($result);
+
+        if (!empty($user['id_mahasiswa'])) {
+            $id_mahasiswa = $user['id_mahasiswa'];
+        } else {
+            // Handle the case where 'id_dosen' is not available in the database
+            echo "The 'id_mahasiswa' is not set in the database.";
+        }
+    } else {
+        // Handle the case where the query fails
+        echo "Error in query: " . mysqli_error($host);
+    }
+?>
+    <a href="indexmahasiswa.php?id_mahasiswa=<?php echo $id_mahasiswa; ?>" class="w3-bar-item w3-button w3-padding-large"><?php echo $_SESSION['login_user']; ?></a>
+        
+    <?php
+} else {
+    // Handle the case where the session variable is not set
+    echo "Session variable 'login_user' is not set.";
+}
+?>
+
+    <a href="../admin/logout.php" class="w3-padding-large w3-hover-red w3-hide-small w3-right no-underline">
             <i class="fa fa-sign-out"></i> Logout
         </a>
   </div>
@@ -139,7 +173,7 @@ $nama_dosen = $row['nama_dosen'] ?? "";
                   <th>No.</th>
                   <th>Progres</th>
                   <th>Status Persetujuan</th>
-                  <th>Unduh Revisi</th>
+                  <th>Catatan Revisi</th>
                 </tr>
 
                 <?php

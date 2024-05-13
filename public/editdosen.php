@@ -204,7 +204,7 @@ $nama_dosen = $row['nama_dosen'] ?? "";
                         <th>No.</th>
                         <th>Progres</th>
                         <th>Status Persetujuan</th>
-                        <th>Unggah Revisi</th>
+                        <th>Catatan Revisi</th>
                       </tr>
                       <tr>
                         <td>1.</td>
