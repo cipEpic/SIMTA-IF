@@ -40,10 +40,10 @@ function sendMessage($chatId, $message) {
 }
 
 // Get current time in hours
-$currentHour = date('H');
+$currentHour = date('H:i');
 
 // Check if it's 9 AM
-if ($currentHour == '22') {
+if ($currentHour == '21:00') {
     // Get tomorrow's date
     $tomorrowDate = date('Y-m-d', strtotime('+1 day'));
 

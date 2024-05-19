@@ -48,7 +48,7 @@ function displayClock() {
     document.getElementById('clock').innerHTML = "Waktu saat ini: " + timeString;
 
     // Pemeriksaan untuk mengirim pesan pada waktu tertentu (misalnya jam 08:00)
-    if (hours == 23 && minutes == 45 && seconds == 0) { //ubah
+    if (hours == 13 && minutes == 22 && seconds == 0) { //ubah
         document.getElementById('sendMessageForm').submit(); // Mengirim formulir secara otomatis
     }
 }
