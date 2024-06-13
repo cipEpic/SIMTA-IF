@@ -2,30 +2,6 @@
 // Koneksi ke database
 require_once "../config/config.php";
 
-// Fungsi untuk mengirim pesan ke Telegram
-function sendMessage($telegram_id, $message_text) {
-    // Ganti dengan token bot Telegram Anda
-    $secret_token = '6994480912:AAGYjTeMCSXuF2oaOcqfTXN2odp9RBaKSZE';
-
-    $url = "https://api.telegram.org/bot" . $secret_token . "/sendMessage?parse_mode=markdown&chat_id=" . $telegram_id;
-    $url = $url . "&text=" . urlencode($message_text);
-    $ch = curl_init();
-    $optArray = array(
-            CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true
-    );
-    curl_setopt_array($ch, $optArray);
-    $result = curl_exec($ch);
-    $err = curl_error($ch);
-    curl_close($ch);
-
-    if ($err) {
-       echo 'Pesan gagal terkirim, error :' . $err;
-    } else {
-        echo 'Pesan terkirim';
-    }
-}
-
 // Get tomorrow's date
 $tomorrowDate = date('Y-m-d', strtotime('+1 day'));
 
@@ -39,8 +15,26 @@ mysqli_stmt_bind_param($stmtBimbingan, "s", $tomorrowDate);
 mysqli_stmt_execute($stmtBimbingan);
 $resultBimbingan = mysqli_stmt_get_result($stmtBimbingan);
 
-// Jika ada bimbingan besok, kirim pesan bimbingan besok ke dosen dan mahasiswa yang terkait
-if (mysqli_num_rows($resultBimbingan) > 0) {
+// Jika tidak ada bimbingan besok, kirim pesan bahwa tidak ada bimbingan
+if (mysqli_num_rows($resultBimbingan) == 0) {
+    // Kirim pesan ke semua dosen
+    $queryDosen = "SELECT * FROM dosen WHERE telegram_id IS NOT NULL";
+    $resultDosen = mysqli_query($host, $queryDosen);
+    while ($rowDosen = mysqli_fetch_assoc($resultDosen)) {
+        $telegram_id = $rowDosen['telegram_id'];
+        $message_text = "Tidak ada bimbingan yang dijadwalkan besok.";
+        sendMessage($telegram_id, $message_text);
+    }
+    // Kirim pesan ke semua mahasiswa
+    $queryMahasiswa = "SELECT * FROM mahasiswa WHERE telegram_id IS NOT NULL";
+    $resultMahasiswa = mysqli_query($host, $queryMahasiswa);
+    while ($rowMahasiswa = mysqli_fetch_assoc($resultMahasiswa)) {
+        $telegram_id = $rowMahasiswa['telegram_id'];
+        $message_text = "Tidak ada bimbingan yang dijadwalkan besok.";
+        sendMessage($telegram_id, $message_text);
+    }
+} else {
+    // Jika ada bimbingan besok, kirim pesan bimbingan besok ke dosen dan mahasiswa yang terkait
     while ($rowBimbingan = mysqli_fetch_assoc($resultBimbingan)) {
         $dosenId = $rowBimbingan['id_dosen'];
         $mahasiswaId = $rowBimbingan['id_mahasiswa'];
@@ -71,4 +65,29 @@ if (mysqli_num_rows($resultBimbingan) > 0) {
         }
     }
 }
+
+// Fungsi untuk mengirim pesan ke Telegram
+function sendMessage($telegram_id, $message_text) {
+    // Ganti dengan token bot Telegram Anda
+    $secret_token = '6994480912:AAGYjTeMCSXuF2oaOcqfTXN2odp9RBaKSZE';
+
+    $url = "https://api.telegram.org/bot" . $secret_token . "/sendMessage?parse_mode=markdown&chat_id=" . $telegram_id;
+    $url = $url . "&text=" . urlencode($message_text);
+    $ch = curl_init();
+    $optArray = array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true
+    );
+    curl_setopt_array($ch, $optArray);
+    $result = curl_exec($ch);
+    $err = curl_error($ch);
+    curl_close($ch);
+
+    if ($err) {
+       echo 'Pesan gagal terkirim, error :' . $err;
+    } else {
+        echo 'Pesan terkirim';
+    }
+}
 ?>
+
